@@ -10,8 +10,7 @@ namespace Student_Management_System
         {
             FillData();
             DisplayMenu();
-
-
+            
 
         }
 
@@ -28,7 +27,9 @@ namespace Student_Management_System
                 Console.WriteLine("4. Display Student Details");
                 Console.WriteLine("5. Add Student");
                 Console.WriteLine("6. Remove Student");
-                Console.WriteLine("7. Exit");
+                Console.WriteLine("7. Add Subject");
+                Console.WriteLine("8. Remove Subject");
+                Console.WriteLine("9. Exit");
                 Console.Write("Operation Input: ");
 
                 int menuInput = int.Parse(Console.ReadLine());
@@ -76,6 +77,20 @@ namespace Student_Management_System
                             break;
                         }
                     case 7:
+                        {
+                            //Console.Clear();
+                            Console.Write("\nEnter Roll No: ");
+                            AddSub(int.Parse(Console.ReadLine()));
+                            break;
+                        }
+                    case 8:
+                        {
+                            //Console.Clear();
+                            Console.Write("\nEnter Roll No: ");
+                            RemoveSub(int.Parse(Console.ReadLine()));
+                            break;
+                        }
+                    case 9:
                         {
                             Console.WriteLine("Application Terminated");
                             break;
@@ -228,6 +243,54 @@ namespace Student_Management_System
                     break;
                 }
             }
+            DisplayAll();
+        }
+
+        public static void AddSub(int rollNo)
+        {
+            foreach (var data in ListOfStudent)
+            {
+                if (rollNo == data.RollNo)
+                {
+                    Console.WriteLine("\nEnter Subjects seperated by ','");
+                    Console.Write($"Enter Subjects: ");
+                    string input = Console.ReadLine();
+                    string[] arrInput = input.Split(',');
+                    List<Subject> sub1 = new List<Subject>();
+                    foreach (var sub11 in arrInput)
+                    {
+                        var sub12 = (Subject)Enum.Parse(typeof(Subject), sub11.Trim(), true);
+                        sub1.Add(sub12);
+                    }
+                    data.AddSubject(sub1);
+                    break;
+                }
+            }
+
+            DisplayAll();
+        }
+
+        public static void RemoveSub(int rollNo)
+        {
+            foreach (var data in ListOfStudent)
+            {
+                if (rollNo == data.RollNo)
+                {
+                    Console.WriteLine("\nEnter Subjects seperated by ','");
+                    Console.Write($"Enter Subjects: ");
+                    string input = Console.ReadLine();
+                    string[] arrInput = input.Split(',');
+                    List<Subject> sub1 = new List<Subject>();
+                    foreach (var sub11 in arrInput)
+                    {
+                        var sub12 = (Subject)Enum.Parse(typeof(Subject), sub11.Trim(), true);
+                        sub1.Add(sub12);
+                    }
+                    data.RemoveSubject(sub1);
+                    break;
+                }
+            }
+
             DisplayAll();
         }
 

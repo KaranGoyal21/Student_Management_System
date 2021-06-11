@@ -51,5 +51,72 @@ namespace Student_Management_System
             this.Age = age;
         }
 
+        public bool AddSubject(Subject subject)
+        {
+            bool doesExist = false;
+            foreach (var sub in Subjects)
+            {
+                if (subject == sub)
+                {
+                    doesExist = true;
+                    break;
+                }
+            }
+
+            if (doesExist)
+            {
+                Console.WriteLine($"Cannot Add {subject} Subject as it already exists");
+                return false;
+            }
+            else
+            {
+                this.Subjects.Add(subject);
+                Console.WriteLine($"Added {subject} Subject Successfully");
+                return true;
+            }
+        }
+
+        public bool RemoveSubject(Subject subject)
+        {
+            var doesExists = false;
+            foreach (var sub in Subjects)
+            {
+                if(sub == subject)
+                {
+                    doesExists = true;
+                    break;
+                }
+            }
+
+            if(doesExists)
+            {
+                this.Subjects.Remove(subject);
+                Console.WriteLine($"{subject} Subject Deleted");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"{subject} Subject Not Found");
+                return false;
+            }
+        }
+
+        public bool AddSubject(List<Subject> subjects)
+        {
+            foreach(var sub in subjects)
+            {
+                AddSubject(sub);
+            }
+            return true;//future implementation of this logic
+        }
+
+        public bool RemoveSubject(List<Subject> subjects)
+        {
+            foreach(var sub in subjects)
+            {
+                RemoveSubject(sub);
+            }
+            return true;//future implementation of this logic
+        }
     }
 }
