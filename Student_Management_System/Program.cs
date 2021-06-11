@@ -9,25 +9,7 @@ namespace Student_Management_System
         static void Main(string[] args)
         {
             FillData();
-            /*DisplayAll();
-
-            Console.Write("\n\nEnter Roll No: ");
-            GetName(int.Parse(Console.ReadLine()));
-
-            Console.Write("\nEnter Student Name: ");
-            GetRollNo(Console.ReadLine());
-
-            Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-            GetAllDetailOfSingleStudent(int.Parse(Console.ReadLine()));
-
-            Console.Write("\n\nEnter Roll No: ");
-            RemoveStudent(int.Parse(Console.ReadLine()));*/
-
-            //var x = "english";
-            //var y = (Subject)Enum.Parse(typeof(Subject), x, true);
-
-            AddStudent();
-            //DisplayMenu();
+            DisplayMenu();
 
 
 
@@ -35,62 +17,82 @@ namespace Student_Management_System
 
         public static void DisplayMenu()
         {
-            Console.WriteLine("Select desired operation");
-            Console.WriteLine("1. Display Students");
-            Console.WriteLine("2. Display Student Name");
-            Console.WriteLine("3. Display Student Roll No.");
-            Console.WriteLine("4. Display Student Details");
-            Console.WriteLine("5. Add Student");
-            Console.WriteLine("6. Remove Student");
-            Console.Write("Operation Input: ");
-
-            int menuInput = int.Parse(Console.ReadLine());
-            switch (menuInput)
+            int continueSystem;
+            do
             {
-                case 1:
-                    {
-                        Console.Clear();
-                        DisplayAll();
+                Console.Clear();
+                Console.WriteLine("Select desired operation");
+                Console.WriteLine("1. Display Students");
+                Console.WriteLine("2. Display Student Name");
+                Console.WriteLine("3. Display Student Roll No.");
+                Console.WriteLine("4. Display Student Details");
+                Console.WriteLine("5. Add Student");
+                Console.WriteLine("6. Remove Student");
+                Console.WriteLine("7. Exit");
+                Console.Write("Operation Input: ");
+
+                int menuInput = int.Parse(Console.ReadLine());
+                switch (menuInput)
+                {
+                    case 1:
+                        {
+                            //Console.Clear();
+                            DisplayAll();
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Console.Clear();
+                            Console.Write("\n\nEnter Roll No: ");
+                            GetName(int.Parse(Console.ReadLine()));
+                            break;
+                        }
+                    case 3:
+                        {
+                            //Console.Clear();
+                            Console.Write("\nEnter Student Name: ");
+                            GetRollNo(Console.ReadLine());
+                            break;
+                        }
+                    case 4:
+                        {
+                            //Console.Clear();
+                            Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
+                            GetAllDetailOfSingleStudent(int.Parse(Console.ReadLine()));
+                            break;
+                        }
+                    case 5:
+                        {
+                            //Console.Clear();
+                            Console.Write("\nEnter Student Details\n");
+                            AddStudent();
+                            break;
+                        }
+                    case 6:
+                        {
+                            //Console.Clear();
+                            Console.Write("\nEnter Roll No: ");
+                            RemoveStudent(int.Parse(Console.ReadLine()));
+                            break;
+                        }
+                    case 7:
+                        {
+                            Console.WriteLine("Application Terminated");
+                            break;
+                        }
+                    default:
                         break;
-                    }
-                case 2:
-                    {
-                        Console.Clear();
-                        Console.Write("\n\nEnter Roll No: ");
-                        GetName(int.Parse(Console.ReadLine()));
-                        break;
-                    }
-                case 3:
-                    {
-                        Console.Clear();
-                        Console.Write("\nEnter Student Name: ");
-                        GetRollNo(Console.ReadLine());
-                        break;
-                    }
-                case 4:
-                    {
-                        Console.Clear();
-                        Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                        GetAllDetailOfSingleStudent(int.Parse(Console.ReadLine()));
-                        break;
-                    }
-                case 5:
-                    {
-                        Console.Clear();
-                        Console.Write("\nEnter Student Details");
-                        AddStudent();
-                        break;
-                    }
-                case 6:
-                    {
-                        Console.Clear();
-                        Console.Write("\nEnter Roll No: ");
-                        RemoveStudent(int.Parse(Console.ReadLine()));
-                        break;
-                    }
-                default:
-                    break;
-            }
+                }
+                ContinueOperation();
+                continueSystem = Convert.ToChar(Console.ReadLine().ToLower());
+            } while (continueSystem == 'y');
+        }
+
+        static void ContinueOperation()
+        {
+            Console.WriteLine("\n\nDo you want to continue");
+            Console.WriteLine("\nPress Y for yes :");
+            Console.WriteLine("Press N for no :");
         }
 
         public static void FillData()
@@ -180,23 +182,25 @@ namespace Student_Management_System
             }
         }
 
-        public static void RemoveStudent(int rollNo)
-        {
-            foreach (var data in ListOfStudent)
-            {
-                if (rollNo == data.RollNo)
-                {
-                    ListOfStudent.Remove(data);
-                    break;
-                }
-            }
-            DisplayAll();
-        }
-
         public static void AddStudent()
         {
+            Student sX = new Student();
+            Console.Write("Enter Standard: ");
+            sX.Standard = int.Parse(Console.ReadLine());
+            Console.Write("\nEnter Roll No: ");
+            sX.RollNo = int.Parse(Console.ReadLine());
+            Console.Write("\nEnter Name: ");
+            sX.Name = Console.ReadLine().Trim();
+            Console.Write("\nEnter Age: ");
+            sX.Age = int.Parse(Console.ReadLine());
+            Console.Write("\nEnter Height: ");
+            sX.Height = double.Parse(Console.ReadLine());
+            Console.Write("\nEnter Address: ");
+            sX.Address = Console.ReadLine().Trim();
 
-            string subs = "marathi, english, hindi";
+            Console.WriteLine("\nEnter Subjects seperated by ','");
+            Console.Write($"Enter Subjects: ");
+            string subs = Console.ReadLine();
             string[] splitSubs = subs.Split(",");
 
             List<Subject> subjects2 = new List<Subject>();
@@ -207,24 +211,23 @@ namespace Student_Management_System
             }
 
 
-            Student sX = new Student();
-            Console.Write("Enter Standard: ");
-            sX.Standard = int.Parse(Console.ReadLine());
-            Console.Write("Enter Roll No: ");
-            sX.RollNo = int.Parse(Console.ReadLine());
-            Console.Write("Enter Name: ");
-            sX.Name = Console.ReadLine();
-            Console.Write("Enter Age: ");
-            sX.Age = int.Parse(Console.ReadLine());
-            Console.Write("Enter Height: ");
-            sX.Height = double.Parse(Console.ReadLine());
-            Console.Write("Enter Address: ");
-            sX.Address = Console.ReadLine();
-            Console.Write("Enter Subjects: ");
             sX.Subjects = subjects2;
 
             ListOfStudent.Add(sX);
 
+            DisplayAll();
+        }
+
+        public static void RemoveStudent(int rollNo)
+        {
+            foreach (var data in ListOfStudent)
+            {
+                if (rollNo == data.RollNo)
+                {
+                    ListOfStudent.Remove(data);
+                    break;
+                }
+            }
             DisplayAll();
         }
 
