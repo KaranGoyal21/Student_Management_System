@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Student_Management_System
 {
@@ -10,13 +11,13 @@ namespace Student_Management_System
         {
             FillData();
             DisplayMenu();
-            
+
 
         }
 
         public static void DisplayMenu()
         {
-            int continueSystem;
+            char continueSystem;
             do
             {
                 Console.Clear();
@@ -37,70 +38,92 @@ namespace Student_Management_System
                 {
                     case 1:
                         {
-                            //Console.Clear();
                             DisplayAll();
                             break;
                         }
                     case 2:
                         {
-                            //Console.Clear();
                             Console.Write("\n\nEnter Roll No: ");
-                            GetName(int.Parse(Console.ReadLine()));
+                            var userInput = IntegerInput();
+                            if (userInput != default)
+                            {
+                                GetName(userInput);
+                            }
                             break;
                         }
                     case 3:
                         {
-                            //Console.Clear();
                             Console.Write("\nEnter Student Name: ");
-                            GetRollNo(Console.ReadLine());
+                            var userInput = StringInput();
+                            if (userInput != default)
+                            {
+                                GetRollNo(userInput);
+                            }
                             break;
                         }
                     case 4:
                         {
-                            //Console.Clear();
                             Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                            GetAllDetailOfSingleStudent(int.Parse(Console.ReadLine()));
+                            var userInput = IntegerInput();
+                            if (userInput != default)
+                            {
+                                GetAllDetailOfSingleStudent(userInput);
+                            }
                             break;
                         }
                     case 5:
                         {
-                            //Console.Clear();
                             Console.Write("\nEnter Student Details\n");
                             AddStudent();
                             break;
                         }
                     case 6:
                         {
-                            //Console.Clear();
                             Console.Write("\nEnter Roll No: ");
-                            RemoveStudent(int.Parse(Console.ReadLine()));
+                            var userInput = IntegerInput();
+                            if (userInput != default)
+                            {
+                                RemoveStudent(userInput);
+                            }
                             break;
                         }
                     case 7:
                         {
-                            //Console.Clear();
                             Console.Write("\nEnter Roll No: ");
-                            AddSub(int.Parse(Console.ReadLine()));
+                            var userInput = IntegerInput();
+                            if (userInput != default)
+                            {
+                                AddSub(userInput);
+                            }
                             break;
                         }
                     case 8:
                         {
-                            //Console.Clear();
                             Console.Write("\nEnter Roll No: ");
-                            RemoveSub(int.Parse(Console.ReadLine()));
-                            break;
-                        }
-                    case 9:
-                        {
-                            Console.WriteLine("Application Terminated");
+                            var userInput = IntegerInput();
+                            if (userInput != default)
+                            {
+                                RemoveSub(userInput);
+                            }
                             break;
                         }
                     default:
                         break;
                 }
-                ContinueOperation();
-                continueSystem = Convert.ToChar(Console.ReadLine().ToLower());
+
+                if (menuInput == 9)
+                {
+                    continueSystem = 'n';
+                }
+                else
+                {
+                    ContinueOperation();
+                    continueSystem = Convert.ToChar(Console.ReadLine().ToLower());
+                }
+
             } while (continueSystem == 'y');
+
+            Console.WriteLine("Application Terminated");
         }
 
         static void ContinueOperation()
@@ -129,6 +152,74 @@ namespace Student_Management_System
             Student s5 = new Student(6, 105, "Justin", 11, 5.2, "Kothrud", subsS5);
 
             ListOfStudent = new List<Student>() { s1, s2, s3, s4, s5 };
+        }
+
+        public static int IntegerInput()
+        {
+            string str = Console.ReadLine().Trim();
+            int num = default;
+            try
+            {
+                //bool checkInteger = int.TryParse(str, out num);
+                num = int.Parse(str);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+            }
+            return num;
+        }
+
+        public static string StringInput()
+        {
+            string input = Console.ReadLine().Trim();
+            string parameter = "^[a-zA-Z]{1,50}$";
+
+            Regex reg = new Regex(parameter);
+            bool isValid = reg.IsMatch(input);
+
+            if (isValid)
+            {
+                return input;
+            }
+            else
+            {
+                Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
+                return default;
+            }
+        }
+
+        public static List<Subject> SubjectInput()
+        {
+            string subInput = Console.ReadLine().Trim();
+            string[] splitSubjects = subInput.Split(",");
+
+            List<Subject> subjectsList = new List<Subject>();
+
+            foreach (string realSub in splitSubjects)
+            {
+                var isValid = Enum.TryParse(typeof(Subject), realSub.Trim(), true, out object x);
+
+                if (isValid)
+                {
+                    subjectsList.Add((Subject)x);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
+                }
+
+                /*try
+                {
+                    var subject = (Subject)Enum.Parse(typeof(Subject), realsubs.Trim(), true);
+                    subjectsList.Add(subject);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }*/
+            }
+            return subjectsList;
         }
 
         public static void DisplayAll()
@@ -169,6 +260,7 @@ namespace Student_Management_System
             foreach (var data in ListOfStudent)
             {
                 if (name == data.Name)
+                //if(name.Equals(data.Name,StringComparison.InvariantCultureIgnoreCase))
                 {
                     Console.WriteLine("Roll No: {0}", data.RollNo);
                     break;
@@ -200,33 +292,28 @@ namespace Student_Management_System
         public static void AddStudent()
         {
             Student sX = new Student();
+
             Console.Write("Enter Standard: ");
-            sX.Standard = int.Parse(Console.ReadLine());
+            sX.Standard = IntegerInput();
+
             Console.Write("\nEnter Roll No: ");
-            sX.RollNo = int.Parse(Console.ReadLine());
+            sX.RollNo = IntegerInput();
+
             Console.Write("\nEnter Name: ");
-            sX.Name = Console.ReadLine().Trim();
+            sX.Name = StringInput();
+
             Console.Write("\nEnter Age: ");
-            sX.Age = int.Parse(Console.ReadLine());
+            sX.Age = IntegerInput();
+
             Console.Write("\nEnter Height: ");
-            sX.Height = double.Parse(Console.ReadLine());
+            sX.Height = IntegerInput();
+
             Console.Write("\nEnter Address: ");
-            sX.Address = Console.ReadLine().Trim();
+            sX.Address = StringInput();
 
             Console.WriteLine("\nEnter Subjects seperated by ','");
             Console.Write($"Enter Subjects: ");
-            string subs = Console.ReadLine();
-            string[] splitSubs = subs.Split(",");
-
-            List<Subject> subjects2 = new List<Subject>();
-            foreach (string realsubs in splitSubs)
-            {
-                var subs1 = (Subject)Enum.Parse(typeof(Subject), realsubs.Trim(), true);
-                subjects2.Add(subs1);
-            }
-
-
-            sX.Subjects = subjects2;
+            sX.Subjects = SubjectInput();
 
             ListOfStudent.Add(sX);
 
