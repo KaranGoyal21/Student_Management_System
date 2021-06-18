@@ -3,17 +3,6 @@ using System.Collections.Generic;
 
 namespace Student_Management_System
 {
-    enum Subject
-    {
-        History = 1,
-        Geography,
-        Maths,
-        English,
-        German,
-        Marathi,
-        Hindi,
-        Science
-    }
     class Student
     {
         public int Standard { get; set; }

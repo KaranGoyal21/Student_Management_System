@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Student_Management_System
 {
     class Program
     {
-        static Student_Management_Services Services = new Student_Management_Services();
+        static StudentManagementService services = new StudentManagementService();
+
         static void Main(string[] args)
         {
-            Services.GetData();
-            GetDisplayMenu();
+            OperateMenuOptions();
         }
 
-        public static void GetDisplayMenu()
+        static void OperateMenuOptions()
         {
             char continueSystem;
             do
@@ -30,16 +29,17 @@ namespace Student_Management_System
                 Console.WriteLine("9. Exit");
                 Console.Write("Operation Input: ");
 
-                int selectOption = GetMenuInput();
+                int selectedOption = int.Parse(Console.ReadLine());
+                PerformMenuOperation(selectedOption);
 
-                if (selectOption == 9)
+                if (selectedOption == 9)
                 {
                     continueSystem = 'n';
                 }
                 else
                 {
                     ContinueOperation();
-                    continueSystem = Convert.ToChar(Console.ReadLine().ToLower());
+                    continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
                 }
 
             } while (continueSystem == 'y');
@@ -47,71 +47,68 @@ namespace Student_Management_System
             Console.WriteLine("Application Terminated");
         }
 
-        public static int GetMenuInput()
+        static void PerformMenuOperation(int menuInput)
         {
-            int menuInput = int.Parse(Console.ReadLine());
             switch (menuInput)
             {
                 case 1:
-                    Services.DisplayAllStudentsData();
+                    services.DisplayAllStudentsData();
                     break;
                 case 2:
                     Console.Write("\n\nEnter Roll No: ");
-                    var userInputCase2 = Services.GetIntegerInput();
+                    var userInputCase2 = services.GetIntegerInput();
                     if (userInputCase2 != default)
                     {
-                        Services.GetName(userInputCase2);
+                        services.GetName(userInputCase2);
                     }
                     break;
                 case 3:
                     Console.Write("\nEnter Student Name: ");
-                    var userInputCase3 = Services.GetStringInput();
+                    var userInputCase3 = services.GetStringInput();
                     if (userInputCase3 != default)
                     {
-                        Services.GetRollNo(userInputCase3);
+                        services.GetRollNo(userInputCase3);
                     }
                     break;
                 case 4:
                     Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                    var userInputCase4 = Services.GetIntegerInput();
+                    var userInputCase4 = services.GetIntegerInput();
                     if (userInputCase4 != default)
                     {
-                        Services.GetDetailsOfSingleStudent(userInputCase4);
+                        services.GetDetailsOfSingleStudent(userInputCase4);
                     }
                     break;
                 case 5:
                     Console.Write("\nEnter Student Details\n");
-                    Services.AddingStudent();
+                    services.AddingStudent();
                     break;
                 case 6:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase6 = Services.GetIntegerInput();
+                    var userInputCase6 = services.GetIntegerInput();
                     if (userInputCase6 != default)
                     {
-                        Services.RemovingStudent(userInputCase6);
+                        services.RemovingStudent(userInputCase6);
                     }
                     break;
                 case 7:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase7 = Services.GetIntegerInput();
+                    var userInputCase7 = services.GetIntegerInput();
                     if (userInputCase7 != default)
                     {
-                        Services.AddingSubject(userInputCase7);
+                        services.AddingSubject(userInputCase7);
                     }
                     break;
                 case 8:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase8 = Services.GetIntegerInput();
+                    var userInputCase8 = services.GetIntegerInput();
                     if (userInputCase8 != default)
                     {
-                        Services.RemovingSubject(userInputCase8);
+                        services.RemovingSubject(userInputCase8);
                     }
                     break;
                 default:
                     break;
             }
-            return menuInput;
-
         }
 
         static void ContinueOperation()

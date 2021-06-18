@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 
 namespace Student_Management_System
 {
-    class Student_Management_Services
+    class StudentManagementService
     {
-        List<Student> listOfStudents;
+        List<Student> _listOfStudents;
+
+        public StudentManagementService()
+        {
+            GetData();
+        }
 
         public int GetMenuInput()
         {
@@ -96,7 +98,7 @@ namespace Student_Management_System
             List<Subject> subjectsOfStudent5 = new List<Subject>() { Subject.English, Subject.Science };
             Student student5 = new Student(6, 105, "Justin", 11, 5.2, "Kothrud", subjectsOfStudent5);
 
-            listOfStudents = new List<Student>() { student1, student2, student3, student4, student5 };
+            _listOfStudents = new List<Student>() { student1, student2, student3, student4, student5 };
         }
 
         public int GetIntegerInput()
@@ -169,7 +171,7 @@ namespace Student_Management_System
 
         public void DisplayAllStudentsData()
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
                     $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\tSubjects: ");
@@ -190,7 +192,7 @@ namespace Student_Management_System
 
         public void GetName(int rollNo)
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -202,7 +204,7 @@ namespace Student_Management_System
 
         public void GetRollNo(string name)
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 if (name == eachStudent.Name)
                 //if(name.Equals(eachStudent.Name,StringComparison.InvariantCultureIgnoreCase))
@@ -215,7 +217,7 @@ namespace Student_Management_System
 
         public void GetDetailsOfSingleStudent(int rollNo)
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -260,18 +262,18 @@ namespace Student_Management_System
             Console.Write($"Enter Subjects: ");
             addStudent.Subjects = GetSubjectInput();
 
-            listOfStudents.Add(addStudent);
+            _listOfStudents.Add(addStudent);
 
             DisplayAllStudentsData();
         }
 
         public void RemovingStudent(int rollNo)
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    listOfStudents.Remove(eachStudent);
+                    _listOfStudents.Remove(eachStudent);
                     break;
                 }
             }
@@ -280,7 +282,7 @@ namespace Student_Management_System
 
         public void AddingSubject(int rollNo)
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -297,7 +299,7 @@ namespace Student_Management_System
 
         public void RemovingSubject(int rollNo)
         {
-            foreach (var eachStudent in listOfStudents)
+            foreach (var eachStudent in _listOfStudents)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
