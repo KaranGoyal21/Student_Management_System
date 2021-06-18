@@ -33,85 +33,9 @@ namespace Student_Management_System
                 Console.WriteLine("9. Exit");
                 Console.Write("Operation Input: ");
 
-                int menuInput = int.Parse(Console.ReadLine());
-                switch (menuInput)
-                {
-                    case 1:
-                        {
-                            DisplayAll();
-                            break;
-                        }
-                    case 2:
-                        {
-                            Console.Write("\n\nEnter Roll No: ");
-                            var userInput = IntegerInput();
-                            if (userInput != default)
-                            {
-                                GetName(userInput);
-                            }
-                            break;
-                        }
-                    case 3:
-                        {
-                            Console.Write("\nEnter Student Name: ");
-                            var userInput = StringInput();
-                            if (userInput != default)
-                            {
-                                GetRollNo(userInput);
-                            }
-                            break;
-                        }
-                    case 4:
-                        {
-                            Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                            var userInput = IntegerInput();
-                            if (userInput != default)
-                            {
-                                GetAllDetailOfSingleStudent(userInput);
-                            }
-                            break;
-                        }
-                    case 5:
-                        {
-                            Console.Write("\nEnter Student Details\n");
-                            AddStudent();
-                            break;
-                        }
-                    case 6:
-                        {
-                            Console.Write("\nEnter Roll No: ");
-                            var userInput = IntegerInput();
-                            if (userInput != default)
-                            {
-                                RemoveStudent(userInput);
-                            }
-                            break;
-                        }
-                    case 7:
-                        {
-                            Console.Write("\nEnter Roll No: ");
-                            var userInput = IntegerInput();
-                            if (userInput != default)
-                            {
-                                AddSub(userInput);
-                            }
-                            break;
-                        }
-                    case 8:
-                        {
-                            Console.Write("\nEnter Roll No: ");
-                            var userInput = IntegerInput();
-                            if (userInput != default)
-                            {
-                                RemoveSub(userInput);
-                            }
-                            break;
-                        }
-                    default:
-                        break;
-                }
+                int selectOption = MenuInput();
 
-                if (menuInput == 9)
+                if (selectOption == 9)
                 {
                     continueSystem = 'n';
                 }
@@ -124,6 +48,73 @@ namespace Student_Management_System
             } while (continueSystem == 'y');
 
             Console.WriteLine("Application Terminated");
+        }
+
+        public static int MenuInput()
+        {
+            int menuInput = int.Parse(Console.ReadLine());
+            switch (menuInput)
+            {
+                case 1:
+                        DisplayAll();
+                        break;
+                case 2:
+                        Console.Write("\n\nEnter Roll No: ");
+                        var userInputCase2 = IntegerInput();
+                        if (userInputCase2 != default)
+                        {
+                            GetName(userInputCase2);
+                        }
+                        break;
+                case 3:
+                        Console.Write("\nEnter Student Name: ");
+                        var userInputCase3 = StringInput();
+                        if (userInputCase3 != default)
+                        {
+                            GetRollNo(userInputCase3);
+                        }
+                        break;
+                case 4:
+                        Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
+                        var userInputCase4 = IntegerInput();
+                        if (userInputCase4 != default)
+                        {
+                            GetAllDetailOfSingleStudent(userInputCase4);
+                        }
+                        break;
+                case 5:
+                        Console.Write("\nEnter Student Details\n");
+                        AddStudent();
+                        break;
+                case 6:
+                        Console.Write("\nEnter Roll No: ");
+                        var userInputCase6 = IntegerInput();
+                        if (userInputCase6 != default)
+                        {
+                            RemoveStudent(userInputCase6);
+                        }
+                        break;
+                case 7:
+                        Console.Write("\nEnter Roll No: ");
+                        var userInputCase7 = IntegerInput();
+                        if (userInputCase7 != default)
+                        {
+                            AddSub(userInputCase7);
+                        }
+                        break;
+                case 8:
+                        Console.Write("\nEnter Roll No: ");
+                        var userInputCase8 = IntegerInput();
+                        if (userInputCase8 != default)
+                        {
+                            RemoveSub(userInputCase8);
+                        }
+                        break;
+                default:
+                    break;
+            }
+            return menuInput;
+
         }
 
         static void ContinueOperation()
@@ -341,15 +332,8 @@ namespace Student_Management_System
                 {
                     Console.WriteLine("\nEnter Subjects seperated by ','");
                     Console.Write($"Enter Subjects: ");
-                    string input = Console.ReadLine();
-                    string[] arrInput = input.Split(',');
-                    List<Subject> sub1 = new List<Subject>();
-                    foreach (var sub11 in arrInput)
-                    {
-                        var sub12 = (Subject)Enum.Parse(typeof(Subject), sub11.Trim(), true);
-                        sub1.Add(sub12);
-                    }
-                    data.AddSubject(sub1);
+                    
+                    data.AddSubject(SubjectInput());
                     break;
                 }
             }
@@ -365,15 +349,8 @@ namespace Student_Management_System
                 {
                     Console.WriteLine("\nEnter Subjects seperated by ','");
                     Console.Write($"Enter Subjects: ");
-                    string input = Console.ReadLine();
-                    string[] arrInput = input.Split(',');
-                    List<Subject> sub1 = new List<Subject>();
-                    foreach (var sub11 in arrInput)
-                    {
-                        var sub12 = (Subject)Enum.Parse(typeof(Subject), sub11.Trim(), true);
-                        sub1.Add(sub12);
-                    }
-                    data.RemoveSubject(sub1);
+                    
+                    data.RemoveSubject(SubjectInput());
                     break;
                 }
             }
