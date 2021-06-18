@@ -51,19 +51,19 @@ namespace Student_Management_System
             this.Age = age;
         }
 
-        public bool AddSubject(Subject subject)
+        public bool AddingSubject(Subject subject)
         {
-            bool doesExist = false;
-            foreach (var sub in Subjects)
+            bool subjectExists = false;
+            foreach (var eachSubject in Subjects)
             {
-                if (subject == sub)
+                if (subject == eachSubject)
                 {
-                    doesExist = true;
+                    subjectExists = true;
                     break;
                 }
             }
 
-            if (doesExist)
+            if (subjectExists)
             {
                 Console.WriteLine($"Cannot Add {subject} Subject as it already exists");
                 return false;
@@ -76,19 +76,19 @@ namespace Student_Management_System
             }
         }
 
-        public bool RemoveSubject(Subject subject)
+        public bool RemovingSubject(Subject subject)
         {
-            var doesExists = false;
-            foreach (var sub in Subjects)
+            var subjectExists = false;
+            foreach (var eachSubject in Subjects)
             {
-                if(sub == subject)
+                if(eachSubject == subject)
                 {
-                    doesExists = true;
+                    subjectExists = true;
                     break;
                 }
             }
 
-            if(doesExists)
+            if(subjectExists)
             {
                 this.Subjects.Remove(subject);
                 Console.WriteLine($"{subject} Subject Deleted");
@@ -101,20 +101,20 @@ namespace Student_Management_System
             }
         }
 
-        public bool AddSubject(List<Subject> subjects)
+        public bool AddingSubject(List<Subject> subjects)
         {
             foreach(var sub in subjects)
             {
-                AddSubject(sub);
+                AddingSubject(sub);
             }
             return true;//future implementation of this logic
         }
 
-        public bool RemoveSubject(List<Subject> subjects)
+        public bool RemovingSubject(List<Subject> subjects)
         {
             foreach(var sub in subjects)
             {
-                RemoveSubject(sub);
+                RemovingSubject(sub);
             }
             return true;//future implementation of this logic
         }
