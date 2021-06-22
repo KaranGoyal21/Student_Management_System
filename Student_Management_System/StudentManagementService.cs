@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace Student_Management_System
@@ -7,6 +8,7 @@ namespace Student_Management_System
     class StudentManagementService
     {
         List<Student> _listOfStudents;
+        FileInfo _data = new FileInfo(@"D:\study\projects\Projects_Vault\Projects_Vault\Practice Project\file_handling\data.txt");
 
         public StudentManagementService()
         {
@@ -97,6 +99,7 @@ namespace Student_Management_System
 
             List<Subject> subjectsOfStudent5 = new List<Subject>() { Subject.English, Subject.Science };
             Student student5 = new Student(6, 105, "Justin", 11, 5.2, "Kothrud", subjectsOfStudent5);
+
 
             _listOfStudents = new List<Student>() { student1, student2, student3, student4, student5 };
         }
@@ -314,5 +317,41 @@ namespace Student_Management_System
             DisplayAllStudentsData();
         }
 
+        private void ReadDataInsideFile()
+        {
+            if (_data.Exists)
+            {
+                StreamReader reader = _data.OpenText();
+                string str = reader.ReadLine();
+                while (str != null)
+                {
+                    Console.WriteLine(str);
+                    str = reader.ReadLine();
+                }
+                reader.Close();
+            }
+            else
+            {
+                Console.WriteLine("File does not exist");
+            }
+        }
+
+        private void WriteDataInsideFile()
+        {
+            if (_data.Exists)
+            {
+                StreamWriter write = _data.AppendText();
+                string str = Console.ReadLine();
+                write.WriteLine(str);
+                write.Close();
+            }
+            else
+            {
+                StreamWriter write = _data.CreateText();
+                string str = Console.ReadLine();
+                write.WriteLine(str);
+                write.Close();
+            }
+        }
     }
 }
