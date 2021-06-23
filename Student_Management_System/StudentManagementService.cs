@@ -8,11 +8,12 @@ namespace Student_Management_System
     class StudentManagementService
     {
         List<Student> _listOfStudents;
-        FileInfo _data = new FileInfo(@"D:\study\projects\Projects_Vault\Projects_Vault\Practice Project\file_handling\data.txt");
+        FileInfo _data = new FileInfo(@"E:\study\study\projects\Projects_Vault\Projects_Vault\Practice Project\file_handling\data.txt");
 
         public StudentManagementService()
         {
-            GetData();
+            //GetData();
+            ReadDataInsideFile();
         }
 
         public int GetMenuInput()
@@ -317,18 +318,55 @@ namespace Student_Management_System
             DisplayAllStudentsData();
         }
 
-        private void ReadDataInsideFile()
+        public void ReadDataInsideFile()
         {
+            _listOfStudents = new List<Student>();
             if (_data.Exists)
             {
                 StreamReader reader = _data.OpenText();
                 string str = reader.ReadLine();
+
+
                 while (str != null)
                 {
-                    Console.WriteLine(str);
+                    string[] arrayOfUserInput = str.Split(",", StringSplitOptions.TrimEntries);
+                    Student addingNewStudent = new Student();
+
+                    addingNewStudent.Standard = int.Parse(arrayOfUserInput[0]);
+                    addingNewStudent.RollNo = int.Parse(arrayOfUserInput[1]);
+                    addingNewStudent.Name = arrayOfUserInput[2];
+                    addingNewStudent.Age = int.Parse(arrayOfUserInput[3]);
+                    addingNewStudent.Height = double.Parse(arrayOfUserInput[4]);
+                    addingNewStudent.Address = arrayOfUserInput[5];
+
+                    List<Subject> listOfSubjects = new List<Subject>();
+
+                    for (int i = 6; i < arrayOfUserInput.Length; i++)
+                    {
+                        string result = arrayOfUserInput[i];
+
+                        var isValid = Enum.TryParse(typeof(Subject), result.Trim(), true, out object subject);
+
+                        if (isValid)
+                        {
+                            listOfSubjects.Add((Subject)subject);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
+                        }
+
+                    }
+
+                    addingNewStudent.Subjects = listOfSubjects;
+
+                    _listOfStudents.Add(addingNewStudent);
+
                     str = reader.ReadLine();
                 }
+
                 reader.Close();
+
             }
             else
             {
