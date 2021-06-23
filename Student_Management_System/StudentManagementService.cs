@@ -121,12 +121,27 @@ namespace Student_Management_System
             return integerInput;
         }
 
+        public double GetDoubleFloatInput()
+        {
+            string userInput = Console.ReadLine().Trim();
+            double doubleInput = default;
+            try
+            {
+                doubleInput = double.Parse(userInput);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine("Error: " + exception.Message);
+            }
+            return doubleInput;
+        }
+
         public string GetStringInput()
         {
             string userInput = Console.ReadLine().Trim();
-            string comparisonFormat = "^[a-zA-Z]{1,50}$";
+            string comparisonFormat = "^[a-zA-Z ]{1,50}$";
 
-            Regex userInputComparison = new Regex(comparisonFormat);
+            Regex userInputComparison = new Regex(comparisonFormat,RegexOptions.IgnoreCase);
             bool isValid = userInputComparison.IsMatch(userInput);
 
             if (isValid)
@@ -257,7 +272,7 @@ namespace Student_Management_System
             addStudent.Age = GetIntegerInput();
 
             Console.Write("\nEnter Height: ");
-            addStudent.Height = GetIntegerInput();
+            addStudent.Height = GetDoubleFloatInput();
 
             Console.Write("\nEnter Address: ");
             addStudent.Address = GetStringInput();
