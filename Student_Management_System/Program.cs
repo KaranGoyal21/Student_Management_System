@@ -29,7 +29,7 @@ namespace Student_Management_System
                 Console.WriteLine("9. Exit");
                 Console.Write("Operation Input: ");
 
-                int selectedOption = services.GetIntegerInput();
+                int selectedOption = int.Parse(Console.ReadLine());
                 PerformMenuOperation(selectedOption);
 
                 if (selectedOption == 9)

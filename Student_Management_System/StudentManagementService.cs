@@ -342,7 +342,6 @@ namespace Student_Management_System
                 StreamReader reader = _dataFile.OpenText();
                 string str = reader.ReadLine();
 
-
                 while (str != null)
                 {
                     string[] arrayOfUserInput = str.Split(",", StringSplitOptions.TrimEntries);
