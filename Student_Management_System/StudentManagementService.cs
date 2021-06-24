@@ -8,7 +8,7 @@ namespace Student_Management_System
     class StudentManagementService
     {
         List<Student> _listOfStudents;
-        FileInfo _data = new FileInfo(@"E:\study\study\projects\Projects_Vault\Projects_Vault\Practice Project\file_handling\data.txt");
+        FileInfo _dataFile = new FileInfo(@"E:\study\study\projects\Projects_Vault\Projects_Vault\Practice Project\file_handling\data.txt");
 
         public StudentManagementService()
         {
@@ -141,7 +141,7 @@ namespace Student_Management_System
             string userInput = Console.ReadLine().Trim();
             string comparisonFormat = "^[a-zA-Z ]{1,50}$";
 
-            Regex userInputComparison = new Regex(comparisonFormat,RegexOptions.IgnoreCase);
+            Regex userInputComparison = new Regex(comparisonFormat, RegexOptions.IgnoreCase);
             bool isValid = userInputComparison.IsMatch(userInput);
 
             if (isValid)
@@ -282,8 +282,9 @@ namespace Student_Management_System
             addStudent.Subjects = GetSubjectInput();
 
             _listOfStudents.Add(addStudent);
-
             DisplayAllStudentsData();
+
+            WriteDataInsideFile(addStudent);
         }
 
         public void RemovingStudent(int rollNo)
@@ -336,9 +337,9 @@ namespace Student_Management_System
         public void ReadDataInsideFile()
         {
             _listOfStudents = new List<Student>();
-            if (_data.Exists)
+            if (_dataFile.Exists)
             {
-                StreamReader reader = _data.OpenText();
+                StreamReader reader = _dataFile.OpenText();
                 string str = reader.ReadLine();
 
 
@@ -389,22 +390,29 @@ namespace Student_Management_System
             }
         }
 
-        private void WriteDataInsideFile()
+        private void WriteDataInsideFile(Student addStudent)
         {
-            if (_data.Exists)
+            string studentStr = $"{addStudent.Standard}, {addStudent.RollNo}, {addStudent.Name}," +
+                      $"{addStudent.Age}, {addStudent.Height}, {addStudent.Address}";
+
+            foreach (Subject subject in addStudent.Subjects)
             {
-                StreamWriter write = _data.AppendText();
-                string str = Console.ReadLine();
-                write.WriteLine(str);
-                write.Close();
+                string result = Convert.ToString(subject);
+                studentStr += $", {subject}";
+            }
+
+            StreamWriter write;
+            if (_dataFile.Exists)
+            {
+                write = _dataFile.AppendText();
             }
             else
             {
-                StreamWriter write = _data.CreateText();
-                string str = Console.ReadLine();
-                write.WriteLine(str);
-                write.Close();
+                write = _dataFile.CreateText();
             }
+
+            write.WriteLine(studentStr);
+            write.Close();
         }
     }
 }
