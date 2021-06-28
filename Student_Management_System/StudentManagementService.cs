@@ -8,7 +8,7 @@ namespace Student_Management_System
     class StudentManagementService
     {
         List<Student> _listOfStudents;
-        FileInfo _dataFile = new FileInfo(@"E:\study\study\projects\Projects_Vault\Projects_Vault\Practice Project\file_handling\data.txt");
+        FileInfo _dataFile = new FileInfo(@"D:\data.txt");
 
         public StudentManagementService()
         {
@@ -342,7 +342,7 @@ namespace Student_Management_System
                 StreamReader reader = _dataFile.OpenText();
                 string str = reader.ReadLine();
 
-                while (str != null)
+                while (!string.IsNullOrEmpty(str))
                 {
                     string[] arrayOfUserInput = str.Split(",", StringSplitOptions.TrimEntries);
                     Student addingNewStudent = new Student();
