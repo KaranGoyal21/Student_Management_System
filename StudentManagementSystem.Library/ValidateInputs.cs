@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Student_Management_System
 {
-    class ValidateInputs
+    public class ValidateInputs
     {
         public int GetIntegerInput()
         {

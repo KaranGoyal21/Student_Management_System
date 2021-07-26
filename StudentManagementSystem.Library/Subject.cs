@@ -1,6 +1,6 @@
 ﻿namespace Student_Management_System
 {
-    enum Subject
+    public enum Subject
     {
         History = 1,
         Geography,

@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Student_Management_System
 {
-    class StudentManagementService
+    public class StudentManagementService
     {
         List<Student> _listOfStudents;
         FileInfo _dataFile = new FileInfo(@"D:\data.txt");
