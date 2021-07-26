@@ -9,6 +9,8 @@ namespace Student_Management_System
     {
         List<Student> _listOfStudents;
         FileInfo _dataFile = new FileInfo(@"D:\data.txt");
+        ValidateInputs validate = new ValidateInputs();
+
 
         public StudentManagementService()
         {
@@ -16,7 +18,7 @@ namespace Student_Management_System
             ReadDataInsideFile();
         }
 
-        public int GetMenuInput()
+        /*public int GetMenuInput()
         {
             int menuInput = int.Parse(Console.ReadLine());
             switch (menuInput)
@@ -81,7 +83,7 @@ namespace Student_Management_System
             }
             return menuInput;
 
-        }
+        }*/
 
         public void GetData()
         {
@@ -103,89 +105,6 @@ namespace Student_Management_System
 
 
             _listOfStudents = new List<Student>() { student1, student2, student3, student4, student5 };
-        }
-
-        public int GetIntegerInput()
-        {
-            string userInput = Console.ReadLine().Trim();
-            int integerInput = default;
-            try
-            {
-                //bool checkInteger = int.TryParse(str, out num);
-                integerInput = int.Parse(userInput);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("Error: " + exception.Message);
-            }
-            return integerInput;
-        }
-
-        public double GetDoubleFloatInput()
-        {
-            string userInput = Console.ReadLine().Trim();
-            double doubleInput = default;
-            try
-            {
-                doubleInput = double.Parse(userInput);
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("Error: " + exception.Message);
-            }
-            return doubleInput;
-        }
-
-        public string GetStringInput()
-        {
-            string userInput = Console.ReadLine().Trim();
-            string comparisonFormat = "^[a-zA-Z ]{1,50}$";
-
-            Regex userInputComparison = new Regex(comparisonFormat, RegexOptions.IgnoreCase);
-            bool isValid = userInputComparison.IsMatch(userInput);
-
-            if (isValid)
-            {
-                return userInput;
-            }
-            else
-            {
-                Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
-                return default;
-            }
-        }
-
-        public List<Subject> GetSubjectInput()
-        {
-            string subjectInput = Console.ReadLine().Trim();
-            string[] arrayOfSubjectInput = subjectInput.Split(",");
-
-            List<Subject> listOfSubjects = new List<Subject>();
-
-            foreach (string eachSubject in arrayOfSubjectInput)
-            {
-                var isValid = Enum.TryParse(typeof(Subject), eachSubject.Trim(), true, out object subject);
-
-                if (isValid)
-                {
-                    listOfSubjects.Add((Subject)subject);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
-                }
-
-                /*try
-                {
-                    var subject = (Subject)Enum.Parse(typeof(Subject), eachSubject.Trim(), true);
-                    listOfSubjects.Add(subject);
-                }
-                catch(Exception exception)
-                {
-                    Console.WriteLine("Error: " + exception.Message);
-                }*/
-            }
-            return listOfSubjects;
         }
 
         public void DisplayAllStudentsData()
@@ -260,26 +179,26 @@ namespace Student_Management_System
             Student addStudent = new Student();
 
             Console.Write("Enter Standard: ");
-            addStudent.Standard = GetIntegerInput();
+            addStudent.Standard = validate.GetIntegerInput();
 
             Console.Write("\nEnter Roll No: ");
-            addStudent.RollNo = GetIntegerInput();
+            addStudent.RollNo = validate.GetIntegerInput();
 
             Console.Write("\nEnter Name: ");
-            addStudent.Name = GetStringInput();
+            addStudent.Name = validate.GetName();
 
             Console.Write("\nEnter Age: ");
-            addStudent.Age = GetIntegerInput();
+            addStudent.Age = validate.GetIntegerInput();
 
             Console.Write("\nEnter Height: ");
-            addStudent.Height = GetDoubleFloatInput();
+            addStudent.Height = validate.GetDoubleFloatInput();
 
             Console.Write("\nEnter Address: ");
-            addStudent.Address = GetStringInput();
+            addStudent.Address = validate.GetAddress();
 
             Console.WriteLine("\nEnter Subjects seperated by ','");
             Console.Write($"Enter Subjects: ");
-            addStudent.Subjects = GetSubjectInput();
+            addStudent.Subjects = validate.GetSubjectInput();
 
             _listOfStudents.Add(addStudent);
             DisplayAllStudentsData();
@@ -309,7 +228,7 @@ namespace Student_Management_System
                     Console.WriteLine("\nEnter Subjects seperated by ','");
                     Console.Write($"Enter Subjects: ");
 
-                    eachStudent.AddingSubject(GetSubjectInput());
+                    eachStudent.AddingSubject(validate.GetSubjectInput());
                     break;
                 }
             }
@@ -326,7 +245,7 @@ namespace Student_Management_System
                     Console.WriteLine("\nEnter Subjects seperated by ','");
                     Console.Write($"Enter Subjects: ");
 
-                    eachStudent.RemovingSubject(GetSubjectInput());
+                    eachStudent.RemovingSubject(validate.GetSubjectInput());
                     break;
                 }
             }

@@ -5,6 +5,7 @@ namespace Student_Management_System
     class Program
     {
         static StudentManagementService services = new StudentManagementService();
+        static ValidateInputs validate = new ValidateInputs();
 
         static void Main(string[] args)
         {
@@ -56,7 +57,7 @@ namespace Student_Management_System
                     break;
                 case 2:
                     Console.Write("\n\nEnter Roll No: ");
-                    var userInputCase2 = services.GetIntegerInput();
+                    var userInputCase2 = validate.GetIntegerInput();
                     if (userInputCase2 != default)
                     {
                         services.GetName(userInputCase2);
@@ -64,7 +65,7 @@ namespace Student_Management_System
                     break;
                 case 3:
                     Console.Write("\nEnter Student Name: ");
-                    var userInputCase3 = services.GetStringInput();
+                    var userInputCase3 = validate.GetName();
                     if (userInputCase3 != default)
                     {
                         services.GetRollNo(userInputCase3);
@@ -72,7 +73,7 @@ namespace Student_Management_System
                     break;
                 case 4:
                     Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                    var userInputCase4 = services.GetIntegerInput();
+                    var userInputCase4 = validate.GetIntegerInput();
                     if (userInputCase4 != default)
                     {
                         services.GetDetailsOfSingleStudent(userInputCase4);
@@ -84,7 +85,7 @@ namespace Student_Management_System
                     break;
                 case 6:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase6 = services.GetIntegerInput();
+                    var userInputCase6 = validate.GetIntegerInput();
                     if (userInputCase6 != default)
                     {
                         services.RemovingStudent(userInputCase6);
@@ -92,7 +93,7 @@ namespace Student_Management_System
                     break;
                 case 7:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase7 = services.GetIntegerInput();
+                    var userInputCase7 = validate.GetIntegerInput();
                     if (userInputCase7 != default)
                     {
                         services.AddingSubject(userInputCase7);
@@ -100,7 +101,7 @@ namespace Student_Management_System
                     break;
                 case 8:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase8 = services.GetIntegerInput();
+                    var userInputCase8 = validate.GetIntegerInput();
                     if (userInputCase8 != default)
                     {
                         services.RemovingSubject(userInputCase8);
