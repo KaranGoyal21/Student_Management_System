@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.Library", "StudentManagementSystem.Library\StudentManagementSystem.Library.csproj", "{009F5057-3496-4767-8C07-1A5B6B0DE1B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.ConsoleUI", "StudentManagementSystem.ConsoleUI\StudentManagementSystem.ConsoleUI.csproj", "{CD8A1EFB-3FDB-4C0A-8E6C-0BC9939F7BEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.ConsoleUI", "StudentManagementSystem.ConsoleUI\StudentManagementSystem.ConsoleUI.csproj", "{CD8A1EFB-3FDB-4C0A-8E6C-0BC9939F7BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.Test", "StudentManagementSystem.Test\StudentManagementSystem.Test.csproj", "{7E4C4F78-ED23-49A8-9A3B-546694782F44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CD8A1EFB-3FDB-4C0A-8E6C-0BC9939F7BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD8A1EFB-3FDB-4C0A-8E6C-0BC9939F7BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD8A1EFB-3FDB-4C0A-8E6C-0BC9939F7BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4C4F78-ED23-49A8-9A3B-546694782F44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4C4F78-ED23-49A8-9A3B-546694782F44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4C4F78-ED23-49A8-9A3B-546694782F44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4C4F78-ED23-49A8-9A3B-546694782F44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
