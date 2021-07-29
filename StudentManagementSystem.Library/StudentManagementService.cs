@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.RegularExpressions;
 
-namespace Student_Management_System
+namespace StudentManagementSystem.Library
 {
     public class StudentManagementService
     {
-        List<Student> _listOfStudents;
-        FileInfo _dataFile = new FileInfo(@"D:\data.txt");
+        StudentDataRepository studentDataRepository = new StudentDataRepository();
         ValidateInputs validate = new ValidateInputs();
 
 
         public StudentManagementService()
         {
             //GetData();
-            ReadDataInsideFile();
+            studentDataRepository.GetData();
         }
 
         /*public int GetMenuInput()
@@ -85,31 +81,9 @@ namespace Student_Management_System
 
         }*/
 
-        public void GetData()
-        {
-            List<Subject> subjectsOfStudent1 = new List<Subject>() { Subject.English, Subject.Geography, Subject.German };
-            Student student1 = new Student(10, 101, "Alex", 15, 5.8, "Pimple Gurav", subjectsOfStudent1);
-
-            List<Subject> subjectsOfStudent2 = new List<Subject>() { Subject.German, Subject.Hindi, Subject.History, Subject.Marathi };
-            Student student2 = new Student(8, 102, "Stacy", 13, 5.5, "Chinchwad", subjectsOfStudent2);
-
-
-            List<Subject> subjectsOfStudent3 = new List<Subject>() { Subject.History };
-            Student student3 = new Student(9, 103, "Max", 14, 5.6, "Koregoan Park", subjectsOfStudent3);
-
-            List<Subject> subjectsOfStudent4 = new List<Subject>() { Subject.Maths, Subject.Science };
-            Student student4 = new Student(7, 104, "Owen", 12, 5.4, "Shivajinagar", subjectsOfStudent4);
-
-            List<Subject> subjectsOfStudent5 = new List<Subject>() { Subject.English, Subject.Science };
-            Student student5 = new Student(6, 105, "Justin", 11, 5.2, "Kothrud", subjectsOfStudent5);
-
-
-            _listOfStudents = new List<Student>() { student1, student2, student3, student4, student5 };
-        }
-
         public void DisplayAllStudentsData()
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
                     $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\tSubjects: ");
@@ -128,21 +102,22 @@ namespace Student_Management_System
             }
         }
 
-        public void GetName(int rollNo)
+        public string GetName(int rollNo)
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
                     Console.WriteLine("Student Name: {0}", eachStudent.Name);
-                    break;
+                    return eachStudent.Name;
                 }
             }
+            return default;
         }
 
         public void GetRollNo(string name)
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 if (name == eachStudent.Name)
                 //if(name.Equals(eachStudent.Name,StringComparison.InvariantCultureIgnoreCase))
@@ -155,7 +130,7 @@ namespace Student_Management_System
 
         public void GetDetailsOfSingleStudent(int rollNo)
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -200,19 +175,19 @@ namespace Student_Management_System
             Console.Write($"Enter Subjects: ");
             addStudent.Subjects = validate.GetSubjectInput();
 
-            _listOfStudents.Add(addStudent);
+            studentDataRepository.StudentsList.Add(addStudent);
             DisplayAllStudentsData();
 
-            WriteDataInsideFile(addStudent);
+            studentDataRepository.WriteDataInsideFile(addStudent);
         }
 
         public void RemovingStudent(int rollNo)
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    _listOfStudents.Remove(eachStudent);
+                    studentDataRepository.StudentsList.Remove(eachStudent);
                     break;
                 }
             }
@@ -221,7 +196,7 @@ namespace Student_Management_System
 
         public void AddingSubject(int rollNo)
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -238,7 +213,7 @@ namespace Student_Management_System
 
         public void RemovingSubject(int rollNo)
         {
-            foreach (var eachStudent in _listOfStudents)
+            foreach (var eachStudent in studentDataRepository.StudentsList)
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -253,84 +228,5 @@ namespace Student_Management_System
             DisplayAllStudentsData();
         }
 
-        public void ReadDataInsideFile()
-        {
-            _listOfStudents = new List<Student>();
-            if (_dataFile.Exists)
-            {
-                StreamReader reader = _dataFile.OpenText();
-                string str = reader.ReadLine();
-
-                while (!string.IsNullOrEmpty(str))
-                {
-                    string[] arrayOfUserInput = str.Split(",", StringSplitOptions.TrimEntries);
-                    Student addingNewStudent = new Student();
-
-                    addingNewStudent.Standard = int.Parse(arrayOfUserInput[0]);
-                    addingNewStudent.RollNo = int.Parse(arrayOfUserInput[1]);
-                    addingNewStudent.Name = arrayOfUserInput[2];
-                    addingNewStudent.Age = int.Parse(arrayOfUserInput[3]);
-                    addingNewStudent.Height = double.Parse(arrayOfUserInput[4]);
-                    addingNewStudent.Address = arrayOfUserInput[5];
-
-                    List<Subject> listOfSubjects = new List<Subject>();
-
-                    for (int i = 6; i < arrayOfUserInput.Length; i++)
-                    {
-                        string result = arrayOfUserInput[i];
-
-                        var isValid = Enum.TryParse(typeof(Subject), result.Trim(), true, out object subject);
-
-                        if (isValid)
-                        {
-                            listOfSubjects.Add((Subject)subject);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
-                        }
-
-                    }
-
-                    addingNewStudent.Subjects = listOfSubjects;
-
-                    _listOfStudents.Add(addingNewStudent);
-
-                    str = reader.ReadLine();
-                }
-
-                reader.Close();
-
-            }
-            else
-            {
-                Console.WriteLine("File does not exist");
-            }
-        }
-
-        private void WriteDataInsideFile(Student addStudent)
-        {
-            string studentStr = $"{addStudent.Standard}, {addStudent.RollNo}, {addStudent.Name}," +
-                      $"{addStudent.Age}, {addStudent.Height}, {addStudent.Address}";
-
-            foreach (Subject subject in addStudent.Subjects)
-            {
-                string result = Convert.ToString(subject);
-                studentStr += $", {subject}";
-            }
-
-            StreamWriter write;
-            if (_dataFile.Exists)
-            {
-                write = _dataFile.AppendText();
-            }
-            else
-            {
-                write = _dataFile.CreateText();
-            }
-
-            write.WriteLine(studentStr);
-            write.Close();
-        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Student_Management_System
+namespace StudentManagementSystem.Library
 {
-    class Student
+    public class Student
     {
         public int Standard { get; set; }
         public int RollNo { get; set; }
@@ -11,12 +11,12 @@ namespace Student_Management_System
         public int Age { get; set; }
         public double Height { get; set; }
         public string Address { get; set; }
-        public List<Subject> Subjects { get; set; }
+        public List<SubjectSelectionRepository> Subjects { get; set; }
 
         public Student()
         { }
 
-        public Student(int standard, int rollNo, string name, int age, double height, string address, List<Subject> subjects)
+        public Student(int standard, int rollNo, string name, int age, double height, string address, List<SubjectSelectionRepository> subjects)
         {
             this.Standard = standard;
             this.RollNo = rollNo;
@@ -40,7 +40,7 @@ namespace Student_Management_System
             this.Age = age;
         }
 
-        public bool AddingSubject(Subject subject)
+        public bool AddingSubject(SubjectSelectionRepository subject)
         {
             bool subjectExists = false;
             foreach (var eachSubject in Subjects)
@@ -65,7 +65,7 @@ namespace Student_Management_System
             }
         }
 
-        public bool RemovingSubject(Subject subject)
+        public bool RemovingSubject(SubjectSelectionRepository subject)
         {
             var subjectExists = false;
             foreach (var eachSubject in Subjects)
@@ -90,7 +90,7 @@ namespace Student_Management_System
             }
         }
 
-        public bool AddingSubject(List<Subject> subjects)
+        public bool AddingSubject(List<SubjectSelectionRepository> subjects)
         {
             foreach(var sub in subjects)
             {
@@ -99,7 +99,7 @@ namespace Student_Management_System
             return true;//future implementation of this logic
         }
 
-        public bool RemovingSubject(List<Subject> subjects)
+        public bool RemovingSubject(List<SubjectSelectionRepository> subjects)
         {
             foreach(var sub in subjects)
             {

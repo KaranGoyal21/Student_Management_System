@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Student_Management_System
+namespace StudentManagementSystem.Library
 {
     public class ValidateInputs
     {
@@ -92,20 +92,20 @@ namespace Student_Management_System
             return isValid;
         }
 
-        public List<Subject> GetSubjectInput()
+        public List<SubjectSelectionRepository> GetSubjectInput()
         {
             string subjectInput = Console.ReadLine().Trim();
             string[] arrayOfSubjectInput = subjectInput.Split(",");
 
-            List<Subject> listOfSubjects = new List<Subject>();
+            List<SubjectSelectionRepository> listOfSubjects = new List<SubjectSelectionRepository>();
 
             foreach (string eachSubject in arrayOfSubjectInput)
             {
-                var isValid = Enum.TryParse(typeof(Subject), eachSubject.Trim(), true, out object subject);
+                var isValid = Enum.TryParse(typeof(SubjectSelectionRepository), eachSubject.Trim(), true, out object subject);
 
                 if (isValid)
                 {
-                    listOfSubjects.Add((Subject)subject);
+                    listOfSubjects.Add((SubjectSelectionRepository)subject);
                 }
                 else
                 {

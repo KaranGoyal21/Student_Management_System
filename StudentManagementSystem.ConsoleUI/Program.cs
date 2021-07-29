@@ -1,6 +1,7 @@
-﻿using System;
+﻿using StudentManagementSystem.Library;
+using System;
 
-namespace Student_Management_System
+namespace StudentManagementSystem.ConsoleUI
 {
     class Program
     {

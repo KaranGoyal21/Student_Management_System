@@ -1,6 +1,6 @@
-﻿namespace Student_Management_System
+﻿namespace StudentManagementSystem.Library
 {
-    public enum Subject
+    public enum SubjectSelectionRepository
     {
         History = 1,
         Geography,
