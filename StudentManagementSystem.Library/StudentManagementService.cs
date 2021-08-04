@@ -5,7 +5,6 @@ namespace StudentManagementSystem.Library
 {
     public class StudentManagementService
     {
-        //StudentDataRepository studentDataRepository = new StudentDataRepository();
         ValidateInputs validate = new ValidateInputs();
         readonly IStudentRepoService _studentFileService;
 
@@ -13,8 +12,6 @@ namespace StudentManagementSystem.Library
         {
             _studentFileService = studentFileService;
         }
-
-
 
         /*public int GetMenuInput()
         {
@@ -152,7 +149,7 @@ namespace StudentManagementSystem.Library
             }
         }
 
-        public void AddingStudent()
+        public void AddStudent()
         {
             Student addStudent = new Student();
 
@@ -184,7 +181,7 @@ namespace StudentManagementSystem.Library
             //studentDataRepository.WriteDataInsideFile(addStudent);
         }
 
-        public void RemovingStudent(int rollNo)
+        public void RemoveStudent(int rollNo)
         {
             foreach (var eachStudent in _studentFileService.FetchStudents())
             {
@@ -197,7 +194,7 @@ namespace StudentManagementSystem.Library
             DisplayAllStudentsData();
         }
 
-        public void AddingSubject(int rollNo)
+        public void AddSubject(int rollNo)
         {
             foreach (var eachStudent in _studentFileService.FetchStudents())
             {
@@ -214,7 +211,7 @@ namespace StudentManagementSystem.Library
             DisplayAllStudentsData();
         }
 
-        public void RemovingSubject(int rollNo)
+        public void RemoveSubject(int rollNo)
         {
             foreach (var eachStudent in _studentFileService.FetchStudents())
             {

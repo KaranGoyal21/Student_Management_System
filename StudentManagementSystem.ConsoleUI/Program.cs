@@ -7,11 +7,11 @@ namespace StudentManagementSystem.ConsoleUI
     {
         static StudentManagementService _services;
         static ValidateInputs _validate = new ValidateInputs();
-        static IStudentRepoService x = new StudentRepoService();
+        static IStudentRepoService studentRepoService = new StudentRepoService();
 
         static void Main(string[] args)
         {
-            _services = new StudentManagementService(x);
+            _services = new StudentManagementService(studentRepoService);
             OperateMenuOptions();
         }
 
@@ -84,14 +84,14 @@ namespace StudentManagementSystem.ConsoleUI
                     break;
                 case 5:
                     Console.Write("\nEnter Student Details\n");
-                    _services.AddingStudent();
+                    _services.AddStudent();
                     break;
                 case 6:
                     Console.Write("\nEnter Roll No: ");
                     var userInputCase6 = _validate.GetIntegerInput();
                     if (userInputCase6 != default)
                     {
-                        _services.RemovingStudent(userInputCase6);
+                        _services.RemoveStudent(userInputCase6);
                     }
                     break;
                 case 7:
@@ -99,7 +99,7 @@ namespace StudentManagementSystem.ConsoleUI
                     var userInputCase7 = _validate.GetIntegerInput();
                     if (userInputCase7 != default)
                     {
-                        _services.AddingSubject(userInputCase7);
+                        _services.AddSubject(userInputCase7);
                     }
                     break;
                 case 8:
@@ -107,7 +107,7 @@ namespace StudentManagementSystem.ConsoleUI
                     var userInputCase8 = _validate.GetIntegerInput();
                     if (userInputCase8 != default)
                     {
-                        _services.RemovingSubject(userInputCase8);
+                        _services.RemoveSubject(userInputCase8);
                     }
                     break;
                 default:
