@@ -6,12 +6,12 @@ namespace StudentManagementSystem.Library
     {
         private List<Student> _listOfStudents;
 
-        public void DeleteDataInsideFile(Student removeStudent)
+        public void DeleteStudent(Student removeStudent)
         {
             _listOfStudents?.Remove(removeStudent);
         }
 
-        public List<Student> ReadDataInsideFile()
+        public List<Student> FetchStudents()
         {
             if (_listOfStudents == null)
             {
@@ -21,7 +21,7 @@ namespace StudentManagementSystem.Library
             return _listOfStudents;
         }
 
-        public void WriteDataInsideFile(Student addStudent)
+        public void AddStudent(Student addStudent)
         {
             _listOfStudents?.Add(addStudent);
         }

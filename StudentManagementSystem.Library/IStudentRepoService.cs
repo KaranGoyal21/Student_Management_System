@@ -4,10 +4,12 @@ namespace StudentManagementSystem.Library
 {
     public interface IStudentRepoService
     {
-        List<Student> ReadDataInsideFile();
+        List<Student> FetchStudents();
 
-        void WriteDataInsideFile(Student addStudent);
+        void AddStudent(Student addStudent);
 
-        void DeleteDataInsideFile(Student addStudent);
+        //void UpdateStudent(Student updateStudent);
+
+        void DeleteStudent(Student removeStudent);
     }
 }

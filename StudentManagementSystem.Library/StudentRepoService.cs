@@ -7,18 +7,61 @@ namespace StudentManagementSystem.Library
     public class StudentRepoService : IStudentRepoService
     {
         List<Student> _listOfStudents;
-        private FileInfo _dataFile = new FileInfo(@"D:\study\study\projects\Student_Management_System\StudentManagementSystem.Library\Data File\data.txt");
+        private const string _dataFilePath = @"D:\study\study\projects\Student_Management_System\StudentManagementSystem.Library\Data File\data.txt";
 
-        public void DeleteDataInsideFile(Student removeStudent)
+        public StudentRepoService()
         {
-            _listOfStudents?.Remove(removeStudent);
+            ReadStudentsFromFile();
         }
-        public List<Student> ReadDataInsideFile()
+
+        public void DeleteStudent(Student removeStudent)
+        {
+            _listOfStudents.Remove(removeStudent);
+            SaveStudentsInFile();
+        }
+
+        public List<Student> FetchStudents()
+        {
+            return _listOfStudents;
+        }
+
+        public void AddStudent(Student addStudent)
+        {
+            _listOfStudents.Add(addStudent);
+            SaveStudentsInFile();
+        }
+
+        private void SaveStudentsInFile()
+        {
+            File.Delete(_dataFilePath);
+            FileInfo _fileData = new FileInfo(_dataFilePath);
+            StreamWriter write = _fileData.CreateText();
+
+            foreach (var student in _listOfStudents)
+            {
+                string studentStr = $"{student.Standard}, {student.RollNo}, {student.Name}," +
+                      $"{student.Age}, {student.Height}, {student.Address}";
+
+                foreach (SubjectSelectionRepository subject in student.Subjects)
+                {
+                    string result = Convert.ToString(subject);
+                    studentStr += $", {subject}";
+                }
+
+                write.WriteLine(studentStr);
+            }
+
+            write.Close();
+        }
+
+        private void ReadStudentsFromFile()
         {
             _listOfStudents = new List<Student>();
-            if (_dataFile.Exists)
+            FileInfo _fileData = new FileInfo(_dataFilePath);
+
+            if (_fileData.Exists)
             {
-                StreamReader reader = _dataFile.OpenText();
+                StreamReader reader = _fileData.OpenText();
                 string str = reader.ReadLine();
 
                 while (!string.IsNullOrEmpty(str))
@@ -66,33 +109,6 @@ namespace StudentManagementSystem.Library
             {
                 Console.WriteLine("File does not exist");
             }
-            return _listOfStudents;
         }
-
-        public void WriteDataInsideFile(Student addStudent)
-        {
-            string studentStr = $"{addStudent.Standard}, {addStudent.RollNo}, {addStudent.Name}," +
-                      $"{addStudent.Age}, {addStudent.Height}, {addStudent.Address}";
-
-            foreach (SubjectSelectionRepository subject in addStudent.Subjects)
-            {
-                string result = Convert.ToString(subject);
-                studentStr += $", {subject}";
-            }
-
-            StreamWriter write;
-            if (_dataFile.Exists)
-            {
-                write = _dataFile.AppendText();
-            }
-            else
-            {
-                write = _dataFile.CreateText();
-            }
-
-            write.WriteLine(studentStr);
-            write.Close();
-        }
-
     }
 }

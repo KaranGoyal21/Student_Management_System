@@ -85,7 +85,7 @@ namespace StudentManagementSystem.Library
 
         public void DisplayAllStudentsData()
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
                     $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\tSubjects: ");
@@ -106,7 +106,7 @@ namespace StudentManagementSystem.Library
 
         public string GetName(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -119,7 +119,7 @@ namespace StudentManagementSystem.Library
 
         public int GetRollNo(string name)
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 if (name == eachStudent.Name)
                 //if(name.Equals(eachStudent.Name,StringComparison.InvariantCultureIgnoreCase))
@@ -133,7 +133,7 @@ namespace StudentManagementSystem.Library
 
         public void GetDetailsOfSingleStudent(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -178,7 +178,7 @@ namespace StudentManagementSystem.Library
             Console.Write($"Enter Subjects: ");
             addStudent.Subjects = validate.GetSubjectInput();
 
-            _studentFileService.WriteDataInsideFile(addStudent);
+            _studentFileService.AddStudent(addStudent);
             DisplayAllStudentsData();
 
             //studentDataRepository.WriteDataInsideFile(addStudent);
@@ -186,11 +186,11 @@ namespace StudentManagementSystem.Library
 
         public void RemovingStudent(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    _studentFileService.DeleteDataInsideFile(eachStudent);
+                    _studentFileService.DeleteStudent(eachStudent);
                     break;
                 }
             }
@@ -199,7 +199,7 @@ namespace StudentManagementSystem.Library
 
         public void AddingSubject(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -216,7 +216,7 @@ namespace StudentManagementSystem.Library
 
         public void RemovingSubject(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
+            foreach (var eachStudent in _studentFileService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
