@@ -1,0 +1,7 @@
+10, 101, Alex, 15, 5.8, Pimple Gurav, English, Geography, German
+8, 102, Stacy, 13, 5.5, Chinchwad, German, Hindi, History, Marathi
+9, 103, Max, 14, 5.6, Koregoan Park, History
+7, 104, Owen, 12, 5.4, Shivajinagar, Maths, Science
+6, 105, Justin, 11, 5.2, Kothrud, English, Science
+1, 10, Karan, 16, 6, Pimpri, Hindi
+10, 108, Dhiren,16, 6, Ravet, Hindi, English

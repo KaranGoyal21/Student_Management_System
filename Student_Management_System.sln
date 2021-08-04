@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.Lib
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.ConsoleUI", "StudentManagementSystem.ConsoleUI\StudentManagementSystem.ConsoleUI.csproj", "{CD8A1EFB-3FDB-4C0A-8E6C-0BC9939F7BEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagementSystem.LibraryTest", "StudentManagementSystem.LibraryTest\StudentManagementSystem.LibraryTest.csproj", "{41311E0B-4C32-4AF8-A77F-57490EEF8A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.LibraryTest", "StudentManagementSystem.LibraryTest\StudentManagementSystem.LibraryTest.csproj", "{41311E0B-4C32-4AF8-A77F-57490EEF8A85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

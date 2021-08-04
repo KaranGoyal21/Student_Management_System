@@ -5,11 +5,13 @@ namespace StudentManagementSystem.ConsoleUI
 {
     class Program
     {
-        static StudentManagementService services = new StudentManagementService();
-        static ValidateInputs validate = new ValidateInputs();
+        static StudentManagementService _services;
+        static ValidateInputs _validate = new ValidateInputs();
+        static IStudentRepoService x = new StudentRepoService();
 
         static void Main(string[] args)
         {
+            _services = new StudentManagementService(x);
             OperateMenuOptions();
         }
 
@@ -31,7 +33,7 @@ namespace StudentManagementSystem.ConsoleUI
                 Console.WriteLine("9. Exit");
                 Console.Write("Operation Input: ");
 
-                int selectedOption = int.Parse(Console.ReadLine());
+                int selectedOption = _validate.GetIntegerInput();
                 PerformMenuOperation(selectedOption);
 
                 if (selectedOption == 9)
@@ -54,58 +56,58 @@ namespace StudentManagementSystem.ConsoleUI
             switch (menuInput)
             {
                 case 1:
-                    services.DisplayAllStudentsData();
+                    _services.DisplayAllStudentsData();
                     break;
                 case 2:
                     Console.Write("\n\nEnter Roll No: ");
-                    var userInputCase2 = validate.GetIntegerInput();
+                    var userInputCase2 = _validate.GetIntegerInput();
                     if (userInputCase2 != default)
                     {
-                        services.GetName(userInputCase2);
+                        _services.GetName(userInputCase2);
                     }
                     break;
                 case 3:
                     Console.Write("\nEnter Student Name: ");
-                    var userInputCase3 = validate.GetName();
+                    var userInputCase3 = _validate.GetName();
                     if (userInputCase3 != default)
                     {
-                        services.GetRollNo(userInputCase3);
+                        _services.GetRollNo(userInputCase3);
                     }
                     break;
                 case 4:
                     Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                    var userInputCase4 = validate.GetIntegerInput();
+                    var userInputCase4 = _validate.GetIntegerInput();
                     if (userInputCase4 != default)
                     {
-                        services.GetDetailsOfSingleStudent(userInputCase4);
+                        _services.GetDetailsOfSingleStudent(userInputCase4);
                     }
                     break;
                 case 5:
                     Console.Write("\nEnter Student Details\n");
-                    services.AddingStudent();
+                    _services.AddingStudent();
                     break;
                 case 6:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase6 = validate.GetIntegerInput();
+                    var userInputCase6 = _validate.GetIntegerInput();
                     if (userInputCase6 != default)
                     {
-                        services.RemovingStudent(userInputCase6);
+                        _services.RemovingStudent(userInputCase6);
                     }
                     break;
                 case 7:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase7 = validate.GetIntegerInput();
+                    var userInputCase7 = _validate.GetIntegerInput();
                     if (userInputCase7 != default)
                     {
-                        services.AddingSubject(userInputCase7);
+                        _services.AddingSubject(userInputCase7);
                     }
                     break;
                 case 8:
                     Console.Write("\nEnter Roll No: ");
-                    var userInputCase8 = validate.GetIntegerInput();
+                    var userInputCase8 = _validate.GetIntegerInput();
                     if (userInputCase8 != default)
                     {
-                        services.RemovingSubject(userInputCase8);
+                        _services.RemovingSubject(userInputCase8);
                     }
                     break;
                 default:
@@ -119,6 +121,7 @@ namespace StudentManagementSystem.ConsoleUI
             Console.WriteLine("\nPress Y for yes :");
             Console.WriteLine("Press N for no :");
         }
+
 
     }
 }

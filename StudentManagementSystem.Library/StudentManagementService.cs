@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace StudentManagementSystem.Library
 {
     public class StudentManagementService
     {
-        StudentDataRepository studentDataRepository = new StudentDataRepository();
+        //StudentDataRepository studentDataRepository = new StudentDataRepository();
         ValidateInputs validate = new ValidateInputs();
+        readonly IStudentRepoService _studentFileService;
 
-
-        public StudentManagementService()
+        public StudentManagementService(IStudentRepoService studentFileService)
         {
-            //GetData();
-            studentDataRepository.GetData();
+            _studentFileService = studentFileService;
         }
+
+
 
         /*public int GetMenuInput()
         {
@@ -83,7 +85,7 @@ namespace StudentManagementSystem.Library
 
         public void DisplayAllStudentsData()
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
                     $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\tSubjects: ");
@@ -104,7 +106,7 @@ namespace StudentManagementSystem.Library
 
         public string GetName(int rollNo)
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -115,22 +117,23 @@ namespace StudentManagementSystem.Library
             return default;
         }
 
-        public void GetRollNo(string name)
+        public int GetRollNo(string name)
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 if (name == eachStudent.Name)
                 //if(name.Equals(eachStudent.Name,StringComparison.InvariantCultureIgnoreCase))
                 {
                     Console.WriteLine("Roll No: {0}", eachStudent.RollNo);
-                    break;
+                    return eachStudent.RollNo;
                 }
             }
+            return default;
         }
 
         public void GetDetailsOfSingleStudent(int rollNo)
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -175,19 +178,19 @@ namespace StudentManagementSystem.Library
             Console.Write($"Enter Subjects: ");
             addStudent.Subjects = validate.GetSubjectInput();
 
-            studentDataRepository.StudentsList.Add(addStudent);
+            _studentFileService.WriteDataInsideFile(addStudent);
             DisplayAllStudentsData();
 
-            studentDataRepository.WriteDataInsideFile(addStudent);
+            //studentDataRepository.WriteDataInsideFile(addStudent);
         }
 
         public void RemovingStudent(int rollNo)
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    studentDataRepository.StudentsList.Remove(eachStudent);
+                    _studentFileService.DeleteDataInsideFile(eachStudent);
                     break;
                 }
             }
@@ -196,7 +199,7 @@ namespace StudentManagementSystem.Library
 
         public void AddingSubject(int rollNo)
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -213,7 +216,7 @@ namespace StudentManagementSystem.Library
 
         public void RemovingSubject(int rollNo)
         {
-            foreach (var eachStudent in studentDataRepository.StudentsList)
+            foreach (var eachStudent in _studentFileService.ReadDataInsideFile())
             {
                 if (rollNo == eachStudent.RollNo)
                 {

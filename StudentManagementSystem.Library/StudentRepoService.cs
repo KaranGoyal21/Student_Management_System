@@ -4,54 +4,16 @@ using System.IO;
 
 namespace StudentManagementSystem.Library
 {
-    public class StudentDataRepository
+    public class StudentRepoService : IStudentRepoService
     {
-        private List<Student> _listOfStudents;
-        private FileInfo _dataFile = new FileInfo(@"D:\data.txt");
+        List<Student> _listOfStudents;
+        private FileInfo _dataFile = new FileInfo(@"D:\study\study\projects\Student_Management_System\StudentManagementSystem.Library\Data File\data.txt");
 
-        public StudentDataRepository()
+        public void DeleteDataInsideFile(Student removeStudent)
         {
-            GetData();
+            _listOfStudents?.Remove(removeStudent);
         }
-        public List<Student> StudentsList
-        {
-            set
-            {
-                _listOfStudents = value;
-            }
-            get
-            {
-                return _listOfStudents;
-            }
-
-        }
-
-        /// <summary>
-        /// hardcoded data in repo
-        /// </summary>
-        private void GetData()
-        {
-            List<SubjectSelectionRepository> subjectsOfStudent1 = new List<SubjectSelectionRepository>() { SubjectSelectionRepository.English, SubjectSelectionRepository.Geography, SubjectSelectionRepository.German };
-            Student student1 = new Student(10, 101, "Alex", 15, 5.8, "Pimple Gurav", subjectsOfStudent1);
-
-            List<SubjectSelectionRepository> subjectsOfStudent2 = new List<SubjectSelectionRepository>() { SubjectSelectionRepository.German, SubjectSelectionRepository.Hindi, SubjectSelectionRepository.History, SubjectSelectionRepository.Marathi };
-            Student student2 = new Student(8, 102, "Stacy", 13, 5.5, "Chinchwad", subjectsOfStudent2);
-
-
-            List<SubjectSelectionRepository> subjectsOfStudent3 = new List<SubjectSelectionRepository>() { SubjectSelectionRepository.History };
-            Student student3 = new Student(9, 103, "Max", 14, 5.6, "Koregoan Park", subjectsOfStudent3);
-
-            List<SubjectSelectionRepository> subjectsOfStudent4 = new List<SubjectSelectionRepository>() { SubjectSelectionRepository.Maths, SubjectSelectionRepository.Science };
-            Student student4 = new Student(7, 104, "Owen", 12, 5.4, "Shivajinagar", subjectsOfStudent4);
-
-            List<SubjectSelectionRepository> subjectsOfStudent5 = new List<SubjectSelectionRepository>() { SubjectSelectionRepository.English, SubjectSelectionRepository.Science };
-            Student student5 = new Student(6, 105, "Justin", 11, 5.2, "Kothrud", subjectsOfStudent5);
-
-
-            _listOfStudents = new List<Student>() { student1, student2, student3, student4, student5 };
-        }
-
-        public void ReadDataInsideFile()
+        public List<Student> ReadDataInsideFile()
         {
             _listOfStudents = new List<Student>();
             if (_dataFile.Exists)
@@ -104,6 +66,7 @@ namespace StudentManagementSystem.Library
             {
                 Console.WriteLine("File does not exist");
             }
+            return _listOfStudents;
         }
 
         public void WriteDataInsideFile(Student addStudent)

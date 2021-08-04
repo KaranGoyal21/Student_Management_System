@@ -11,28 +11,34 @@ namespace StudentManagementSystem.Library
     {
         public int GetIntegerInput()
         {
-            string userInput = Console.ReadLine().Trim();
-            int integerInput = default;
-            try
+            string userInput;
+            int integerInput;
+            do
             {
-                //bool checkInteger = int.TryParse(str, out num);
-                integerInput = int.Parse(userInput);
+                userInput = Console.ReadLine().Trim();
+                integerInput = default;
+                try
+                {
+                    //bool checkInteger = int.TryParse(str, out num);
+                    integerInput = int.Parse(userInput);
 
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine("Error: " + exception.Message);
-            }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine("Error: " + exception.Message);
+                }
 
-            if (integerInput >= 1)
-            {
-                return integerInput;
+                if (integerInput >= 1)
+                {
+                    return integerInput;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid inputs, please enter positive numbers only");
+                    return default;
+                }
             }
-            else
-            {
-                Console.WriteLine("Invalid inputs, please enter positive numbers only");
-                return default;
-            }
+            while (integerInput != 1);
         }
 
         public double GetDoubleFloatInput()
