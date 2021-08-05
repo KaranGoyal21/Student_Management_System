@@ -111,7 +111,7 @@ namespace StudentManagementSystem.Library
                     return eachStudent.Name;
                 }
             }
-            return default;
+            throw new Exception();
         }
 
         public int GetRollNo(string name)
@@ -125,10 +125,10 @@ namespace StudentManagementSystem.Library
                     return eachStudent.RollNo;
                 }
             }
-            return default;
+            throw new Exception();
         }
 
-        public void GetDetailsOfSingleStudent(int rollNo)
+        public Student GetDetailsOfSingleStudent(int rollNo)
         {
             foreach (var eachStudent in _studentFileService.FetchStudents())
             {
@@ -142,43 +142,68 @@ namespace StudentManagementSystem.Library
                     {
                         Console.Write($"{eachSubject}, ");
                     }
-
-                    Console.WriteLine();
-                    break;
+                    return eachStudent;
                 }
             }
+            throw new Exception();
         }
 
         public void AddStudent()
         {
             Student addStudent = new Student();
 
-            Console.Write("Enter Standard: ");
-            addStudent.Standard = validate.GetIntegerInput();
+            do
+            {
+                Console.Write("\nEnter Standard: ");
+                addStudent.Standard = validate.GetIntegerInput();
+            } while (addStudent.Standard == default);
 
-            Console.Write("\nEnter Roll No: ");
-            addStudent.RollNo = validate.GetIntegerInput();
+            do
+            {
+                Console.Write("\nEnter Roll No: ");
+                addStudent.RollNo = validate.GetIntegerInput();
+            } while (addStudent.RollNo == default); ;
 
-            Console.Write("\nEnter Name: ");
-            addStudent.Name = validate.GetName();
+            do
+            {
+                Console.Write("\nEnter Name: ");
+                addStudent.Name = validate.GetName();
+            } while (addStudent.Name == default);
 
-            Console.Write("\nEnter Age: ");
-            addStudent.Age = validate.GetIntegerInput();
+            do
+            {
+                Console.Write("\nEnter Age: ");
+                addStudent.Age = validate.GetIntegerInput();
+            }
+            while (addStudent.Age == default);
 
-            Console.Write("\nEnter Height: ");
-            addStudent.Height = validate.GetDoubleFloatInput();
+            do
+            {
+                Console.Write("\nEnter Height: ");
+                addStudent.Height = validate.GetDoubleFloatInput();
+            }
+            while (addStudent.Height == default);
 
-            Console.Write("\nEnter Address: ");
-            addStudent.Address = validate.GetAddress();
+            do
+            {
+                Console.Write("\nEnter Address: ");
+                addStudent.Address = validate.GetAddress();
+            }
+            while (addStudent.Address == default);
 
-            Console.WriteLine("\nEnter Subjects seperated by ','");
-            Console.Write($"Enter Subjects: ");
-            addStudent.Subjects = validate.GetSubjectInput();
+            do
+            {
+                Console.WriteLine("\nEnter Subjects seperated by ','");
+                Console.Write($"Enter Subjects: ");
+                addStudent.Subjects = validate.GetSubjectInput();
+            }
+            while (addStudent.Subjects == default);
 
-            _studentFileService.AddStudent(addStudent);
-            DisplayAllStudentsData();
-
-            //studentDataRepository.WriteDataInsideFile(addStudent);
+            if (addStudent.Standard != default && addStudent.RollNo != default && addStudent.Name != default && addStudent.Age != default && addStudent.Height != default && addStudent.Address != default && addStudent.Subjects != default)
+            {
+                _studentFileService.AddStudent(addStudent);
+                DisplayAllStudentsData();
+            }
         }
 
         public void RemoveStudent(int rollNo)

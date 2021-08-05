@@ -17,7 +17,7 @@ namespace StudentManagementSystem.ConsoleUI
 
         static void OperateMenuOptions()
         {
-            char continueSystem;
+            char exitApplication;
             do
             {
                 Console.Clear();
@@ -38,16 +38,21 @@ namespace StudentManagementSystem.ConsoleUI
 
                 if (selectedOption == 9)
                 {
-                    continueSystem = 'n';
+                    exitApplication = 'y';
                 }
                 else
                 {
-                    ContinueOperation();
-                    continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                    ExitApplication();
+                    exitApplication = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                }
+                while (exitApplication != 'n' && exitApplication != 'y')
+                {
+                    Console.WriteLine("Invalid input, please try again....!!");
+                    ExitApplication();
+                    exitApplication = Convert.ToChar(Console.ReadLine().Trim().ToLower());
                 }
 
-            } while (continueSystem == 'y');
-
+            } while (exitApplication == 'n');
             Console.WriteLine("Application Terminated");
         }
 
@@ -59,28 +64,13 @@ namespace StudentManagementSystem.ConsoleUI
                     _services.DisplayAllStudentsData();
                     break;
                 case 2:
-                    Console.Write("\n\nEnter Roll No: ");
-                    var userInputCase2 = _validate.GetIntegerInput();
-                    if (userInputCase2 != default)
-                    {
-                        _services.GetName(userInputCase2);
-                    }
+                    GetStudentName();
                     break;
                 case 3:
-                    Console.Write("\nEnter Student Name: ");
-                    var userInputCase3 = _validate.GetName();
-                    if (userInputCase3 != default)
-                    {
-                        _services.GetRollNo(userInputCase3);
-                    }
+                    GetStudentRollNo();
                     break;
                 case 4:
-                    Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
-                    var userInputCase4 = _validate.GetIntegerInput();
-                    if (userInputCase4 != default)
-                    {
-                        _services.GetDetailsOfSingleStudent(userInputCase4);
-                    }
+                    GetStudentDetails();
                     break;
                 case 5:
                     Console.Write("\nEnter Student Details\n");
@@ -115,11 +105,130 @@ namespace StudentManagementSystem.ConsoleUI
             }
         }
 
-        static void ContinueOperation()
+        private static void GetStudentRollNo()
         {
-            Console.WriteLine("\n\nDo you want to continue");
-            Console.WriteLine("\nPress Y for yes :");
-            Console.WriteLine("Press N for no :");
+            char continueSystem;
+            string userInput;
+            int studentRollNo = default;
+            do
+            {
+                Console.Write("\nEnter Student Name: ");
+                userInput = _validate.GetName();
+                if (userInput != default)
+                {
+                    try
+                    {
+                        studentRollNo = _services.GetRollNo(userInput);
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine($"Student with Name: {userInput} not found");
+                    }
+                }
+                ContinueOperationInputs();
+                continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                if (continueSystem == 'n')
+                {
+                    Console.WriteLine("Operation terminated....!!");
+                    break;
+                }
+                while (continueSystem != 'n' && continueSystem != 'y')
+                {
+                    Console.WriteLine("Invalid input, please try again....!!");
+                    ContinueOperationInputs();
+                    continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                }
+            }
+            while (userInput == default || studentRollNo == default || continueSystem == 'y');
+        }
+
+        private static void GetStudentName()
+        {
+            char continueSystem;
+            int userInput;
+            string studentName = null;
+            do
+            {
+                Console.Write("\n\nEnter Roll No: ");
+                userInput = _validate.GetIntegerInput();
+                if (userInput != default)
+                {
+                    try
+                    {
+                        studentName = _services.GetName(userInput);
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine($"Student with Roll No: {userInput} not found");
+                    }
+                }
+                ContinueOperationInputs();
+                continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                if (continueSystem == 'n')
+                {
+                    Console.WriteLine("Operation terminated....!!");
+                    break;
+                }
+                while (continueSystem != 'n' && continueSystem != 'y')
+                {
+                    Console.WriteLine("Invalid input, please try again....!!");
+                    ContinueOperationInputs();
+                    continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                }
+            }
+            while (userInput == default || studentName == null || continueSystem == 'y');
+        }
+
+        private static void GetStudentDetails()
+        {
+            char continueSystem;
+            int userInput;
+            Student studentDetails = default;
+            do
+            {
+                Console.Write("\nTo Get All Details Of Student Please Enter Roll No: ");
+                userInput = _validate.GetIntegerInput();
+                if (userInput != default)
+                {
+                    try
+                    {
+                        studentDetails = _services.GetDetailsOfSingleStudent(userInput);
+                        break;
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine($"Student with Roll No: {userInput} not found");
+                    }
+                }
+                ContinueOperationInputs();
+                continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                if (continueSystem == 'n')
+                {
+                    Console.WriteLine("Operation terminated....!!");
+                    break;
+                }
+                while (continueSystem != 'n' && continueSystem != 'y')
+                {
+                    Console.WriteLine("Invalid input, please try again....!!");
+                    ContinueOperationInputs();
+                    continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+                }
+            }
+            while (userInput == default || studentDetails == default || continueSystem == 'y');
+        }
+
+        private static void ContinueOperationInputs()
+        {
+            Console.WriteLine("\n\nDo you want to re-enter the failed input");
+            Console.WriteLine("\nPress (Y/N) for yes or no respectively :");
+        }
+
+        private static void ExitApplication()
+        {
+            Console.WriteLine("\n\nDo you want to exit the application");
+            Console.WriteLine("\nPress (Y/N) for yes or no respectively :");
         }
 
 

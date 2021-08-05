@@ -17,7 +17,6 @@ namespace StudentManagementSystem.Library
             {
                 //bool checkInteger = int.TryParse(str, out num);
                 integerInput = int.Parse(userInput);
-
             }
             catch (Exception exception)
             {
@@ -47,7 +46,15 @@ namespace StudentManagementSystem.Library
             {
                 Console.WriteLine("Error: " + exception.Message);
             }
-            return doubleInput;
+            if (doubleInput > 0)
+            {
+                return doubleInput;
+            }
+            else
+            {
+                Console.WriteLine("Invalid inputs, please enter positive numbers only");
+                return default;
+            }
         }
 
 
@@ -96,33 +103,34 @@ namespace StudentManagementSystem.Library
         {
             string subjectInput = Console.ReadLine().Trim();
             string[] arrayOfSubjectInput = subjectInput.Split(",");
+            bool isValid = false;
+            object subject = default;
 
             List<SubjectSelectionRepository> listOfSubjects = new List<SubjectSelectionRepository>();
 
             foreach (string eachSubject in arrayOfSubjectInput)
             {
-                var isValid = Enum.TryParse(typeof(SubjectSelectionRepository), eachSubject.Trim(), true, out object subject);
+                do
+                {
+                    try
+                    {
+                        isValid = Enum.TryParse(typeof(SubjectSelectionRepository), eachSubject.Trim(), true, out subject);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine("Error: " + exception.Message);
+                    }
 
-                if (isValid)
-                {
-                    listOfSubjects.Add((SubjectSelectionRepository)subject);
+                    if (isValid == true)
+                    {
+                        listOfSubjects.Add((SubjectSelectionRepository)subject);
+                        return listOfSubjects;
+                    }
                 }
-                else
-                {
-                    Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
-                }
-
-                /*try
-                {
-                    var subject = (Subject)Enum.Parse(typeof(Subject), eachSubject.Trim(), true);
-                    listOfSubjects.Add(subject);
-                }
-                catch(Exception exception)
-                {
-                    Console.WriteLine("Error: " + exception.Message);
-                }*/
+                while (isValid == true);
+                Console.WriteLine("Invalid inputs, please enter alphabetical characters only");
             }
-            return listOfSubjects;
+            return default;
         }
 
     }
