@@ -6,11 +6,11 @@ namespace StudentManagementSystem.Library
     public class StudentManagementService
     {
         ValidateInputs validate = new ValidateInputs();
-        readonly IStudentRepoService _studentFileService;
+        readonly IStudentRepoService _studentRepoService;
 
-        public StudentManagementService(IStudentRepoService studentFileService)
+        public StudentManagementService(IStudentRepoService studentRepoService)
         {
-            _studentFileService = studentFileService;
+            _studentRepoService = studentRepoService;
         }
 
         /*public int GetMenuInput()
@@ -82,7 +82,7 @@ namespace StudentManagementSystem.Library
 
         public void DisplayAllStudentsData()
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
                     $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\tSubjects: ");
@@ -103,7 +103,7 @@ namespace StudentManagementSystem.Library
 
         public string GetName(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -116,7 +116,7 @@ namespace StudentManagementSystem.Library
 
         public int GetRollNo(string name)
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (name == eachStudent.Name)
                 //if(name.Equals(eachStudent.Name,StringComparison.InvariantCultureIgnoreCase))
@@ -130,7 +130,7 @@ namespace StudentManagementSystem.Library
 
         public Student GetDetailsOfSingleStudent(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -201,18 +201,18 @@ namespace StudentManagementSystem.Library
 
             if (addStudent.Standard != default && addStudent.RollNo != default && addStudent.Name != default && addStudent.Age != default && addStudent.Height != default && addStudent.Address != default && addStudent.Subjects != default)
             {
-                _studentFileService.AddStudent(addStudent);
+                _studentRepoService.AddStudent(addStudent);
                 DisplayAllStudentsData();
             }
         }
 
         public void RemoveStudent(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    _studentFileService.DeleteStudent(eachStudent);
+                    _studentRepoService.DeleteStudent(eachStudent);
                     break;
                 }
             }
@@ -221,7 +221,7 @@ namespace StudentManagementSystem.Library
 
         public void AddSubject(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
@@ -238,7 +238,7 @@ namespace StudentManagementSystem.Library
 
         public void RemoveSubject(int rollNo)
         {
-            foreach (var eachStudent in _studentFileService.FetchStudents())
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {

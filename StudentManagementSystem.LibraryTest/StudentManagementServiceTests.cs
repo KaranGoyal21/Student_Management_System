@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StudentManagementSystem.Library;
+using System;
 using System.Collections.Generic;
 
 namespace StudentManagementSystem.LibraryTest
@@ -35,8 +36,15 @@ namespace StudentManagementSystem.LibraryTest
             Student student = new Student(8, 609, "FakeStudent", 13, 5.5, "Chinchwad", subjectsOfStudent);
 
             //--Act
-
-            string resultName = studentManagementService.GetName(student.RollNo);
+            string resultName;
+            try
+            {
+                resultName = studentManagementService.GetName(student.RollNo);
+            }
+            catch(Exception)
+            {
+                resultName = default;
+            }
 
             //--Assert
             Assert.AreEqual(default(string), resultName);
@@ -69,8 +77,15 @@ namespace StudentManagementSystem.LibraryTest
             Student student1 = new Student(8, 102, "FakeName", 13, 5.5, "Chinchwad", subjectsOfStudent);
 
             //--Act
-
-            int resultRollNo = studentManagementService.GetRollNo(student1.Name);
+            int resultRollNo;
+            try
+            {
+                resultRollNo = studentManagementService.GetRollNo(student1.Name);
+            }
+            catch (Exception)
+            {
+                resultRollNo = default;
+            }
 
             //--Assert
             Assert.AreEqual(default(int), resultRollNo);
