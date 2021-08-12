@@ -5,3 +5,4 @@
 6, 105, Justin,11, 5.2, Kothrud, English, Science
 1, 10, Karan,16, 6, Pimpri, Hindi
 10, 108, Dhiren,16, 6, Ravet, Hindi, English
+12, 12, d,12, 12, f,, English
