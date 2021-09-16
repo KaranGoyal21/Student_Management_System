@@ -4,12 +4,12 @@ using System.IO;
 
 namespace StudentManagementSystem.Library
 {
-    public class StudentRepoService : IStudentRepoService
+    public class StudentFileRepoService : IStudentRepoService
     {
         private List<Student> _listOfStudents;
         private const string _dataFilePath = @"E:\study\study\projects\Student_Management_System\StudentManagementSystem.Library\Data File\data.txt";
 
-        public StudentRepoService()
+        public StudentFileRepoService()
         {
             ReadStudentsFromFile();
         }

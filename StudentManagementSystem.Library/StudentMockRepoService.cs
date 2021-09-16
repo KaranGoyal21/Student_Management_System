@@ -2,7 +2,7 @@
 
 namespace StudentManagementSystem.Library
 {
-    public class MockStudentRepoService : IStudentRepoService
+    public class StudentMockRepoService : IStudentRepoService
     {
         private List<Student> _listOfStudents;
 

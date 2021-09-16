@@ -5,7 +5,7 @@ namespace StudentManagementSystem.Library
 {
     public class StudentManagementService
     {
-        ValidateInputs validate = new ValidateInputs();
+        ValidateInputs _validate = new ValidateInputs();
         readonly IStudentRepoService _studentRepoService;
 
         public StudentManagementService(IStudentRepoService studentRepoService)
@@ -80,25 +80,9 @@ namespace StudentManagementSystem.Library
 
         }*/
 
-        public void DisplayAllStudentsData()
+        public List<Student> DisplayAllStudentsData()
         {
-            foreach (var eachStudent in _studentRepoService.FetchStudents())
-            {
-                Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
-                    $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\tSubjects: ");
-
-                foreach (var subject in eachStudent.Subjects)
-                {
-                    if (eachStudent.Subjects.Count >= 2)
-                    {
-                        Console.Write($"{subject}, ");
-                    }
-                    else
-                    {
-                        Console.Write($"{subject}\t>>>>>>>>>>>>>>>>>>>>>>>>>>(Please Enter Min. Two Subjects)");
-                    }
-                }
-            }
+            return _studentRepoService.FetchStudents();
         }
 
         public string GetName(int rollNo)
@@ -107,7 +91,6 @@ namespace StudentManagementSystem.Library
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    Console.WriteLine("Student Name: {0}", eachStudent.Name);
                     return eachStudent.Name;
                 }
             }
@@ -121,7 +104,6 @@ namespace StudentManagementSystem.Library
                 if (name == eachStudent.Name)
                 //if(name.Equals(eachStudent.Name,StringComparison.InvariantCultureIgnoreCase))
                 {
-                    Console.WriteLine("Roll No: {0}", eachStudent.RollNo);
                     return eachStudent.RollNo;
                 }
             }
@@ -134,90 +116,31 @@ namespace StudentManagementSystem.Library
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    Console.Write($"\nStandard: {eachStudent.Standard}\tRoll No: {eachStudent.RollNo}\tName: {eachStudent.Name}\t" +
-                    $"Age: {eachStudent.Age}\tHeight: {eachStudent.Height}\tAddress: {eachStudent.Address}\t" +
-                    $"Subjects: ");
-
-                    foreach (var eachSubject in eachStudent.Subjects)
-                    {
-                        Console.Write($"{eachSubject}, ");
-                    }
                     return eachStudent;
                 }
             }
             throw new Exception();
         }
 
-        public void AddStudent()
+        public void AddStudent(Student addStudent)
         {
-            Student addStudent = new Student();
-
-            do
-            {
-                Console.Write("\nEnter Standard: ");
-                addStudent.Standard = validate.GetIntegerInput();
-            } while (addStudent.Standard == default);
-
-            do
-            {
-                Console.Write("\nEnter Roll No: ");
-                addStudent.RollNo = validate.GetIntegerInput();
-            } while (addStudent.RollNo == default); ;
-
-            do
-            {
-                Console.Write("\nEnter Name: ");
-                addStudent.Name = validate.GetName();
-            } while (addStudent.Name == default);
-
-            do
-            {
-                Console.Write("\nEnter Age: ");
-                addStudent.Age = validate.GetIntegerInput();
-            }
-            while (addStudent.Age == default);
-
-            do
-            {
-                Console.Write("\nEnter Height: ");
-                addStudent.Height = validate.GetDoubleFloatInput();
-            }
-            while (addStudent.Height == default);
-
-            do
-            {
-                Console.Write("\nEnter Address: ");
-                addStudent.Address = validate.GetAddress();
-            }
-            while (addStudent.Address == default);
-
-            do
-            {
-                Console.WriteLine("\nEnter Subjects seperated by ','");
-                Console.Write($"Enter Subjects: ");
-                addStudent.Subjects = validate.GetSubjectInput();
-            }
-            while (addStudent.Subjects == default);
-
-            if (addStudent.Standard != default && addStudent.RollNo != default && addStudent.Name != default && addStudent.Age != default && addStudent.Height != default && addStudent.Address != default && addStudent.Subjects != default)
-            {
-                _studentRepoService.AddStudent(addStudent);
-                DisplayAllStudentsData();
-            }
+            _studentRepoService.AddStudent(addStudent);
+            DisplayAllStudentsData();
         }
 
-        public void RemoveStudent(int rollNo)
+        public List<Student> RemoveStudent(int rollNo)
         {
             foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
                     _studentRepoService.DeleteStudent(eachStudent);
-                    break;
+                    return DisplayAllStudentsData();
                 }
             }
-            DisplayAllStudentsData();
+            throw new Exception();
         }
+
 
         public void AddSubject(int rollNo)
         {
@@ -228,7 +151,7 @@ namespace StudentManagementSystem.Library
                     Console.WriteLine("\nEnter Subjects seperated by ','");
                     Console.Write($"Enter Subjects: ");
 
-                    eachStudent.AddingSubject(validate.GetSubjectInput());
+                    eachStudent.AddingSubject(_validate.GetSubjectInput());
                     break;
                 }
             }
@@ -245,7 +168,7 @@ namespace StudentManagementSystem.Library
                     Console.WriteLine("\nEnter Subjects seperated by ','");
                     Console.Write($"Enter Subjects: ");
 
-                    eachStudent.RemovingSubject(validate.GetSubjectInput());
+                    eachStudent.RemovingSubject(_validate.GetSubjectInput());
                     break;
                 }
             }

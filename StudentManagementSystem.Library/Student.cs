@@ -11,6 +11,7 @@ namespace StudentManagementSystem.Library
         public int Age { get; set; }
         public double Height { get; set; }
         public string Address { get; set; }
+
         public List<SubjectSelectionRepository> Subjects { get; set; }
 
         public Student()
