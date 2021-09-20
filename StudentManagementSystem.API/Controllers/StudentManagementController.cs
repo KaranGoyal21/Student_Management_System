@@ -45,7 +45,7 @@ namespace StudentManagementSystem.API.Controllers
         [HttpGet("student_details")]
         public Student GetStudentDetails(int rollNo)
         {
-            return _services.GetDetailsOfSingleStudent(rollNo);
+            return _services.GetDetailsOfSingleStudent(rollNo); 
         }
 
         // POST api/<StudentManagementController>

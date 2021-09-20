@@ -6,12 +6,5 @@
 10, 108, Dhiren,16, 6, Ravet, Hindi, English
 0, 0, string,0, 0, string, History
 10, 10, string,10, 10, string, History, Geography, Maths, English
-0, 0, string,0, 0, string, History
-0, 0, string,0, 0, string, History
-0, 0, string,0, 0, string, History
-0, 0, string,0, 0, string, History
-0, 0, string,0, 0, string, History
-0, 0, dhi,0, 0, hh, History
-0, 0, karan,0, 0, dg, History
-0, 0, karan,0, 0, dg, History
 10, 501, Karan,25, 5.8, Pimpri, English, Geography, German
+11, 123, kk,15, 66, kkkkk, Hindi

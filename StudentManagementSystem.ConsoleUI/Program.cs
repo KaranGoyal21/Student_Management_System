@@ -101,7 +101,7 @@ namespace StudentManagementSystem.ConsoleUI
 
         private static void RemoveStudent()
         {
-            char continueSystem;
+            char continueSystem = default;
             int userInput;
             do
             {
@@ -112,6 +112,8 @@ namespace StudentManagementSystem.ConsoleUI
                     try
                     {
                         _services.RemoveStudent(userInput);
+                        Console.WriteLine($"Student with Roll No: {userInput} deleted");
+                        break;
                     }
                     catch
                     {
@@ -120,6 +122,7 @@ namespace StudentManagementSystem.ConsoleUI
                 }
                 ContinueOperationInputs();
                 continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
+
                 if (continueSystem == 'n')
                 {
                     Console.WriteLine("Operation terminated....!!");
@@ -131,6 +134,7 @@ namespace StudentManagementSystem.ConsoleUI
                     ContinueOperationInputs();
                     continueSystem = Convert.ToChar(Console.ReadLine().Trim().ToLower());
                 }
+
             }
             while (userInput == default || continueSystem == 'y');
         }

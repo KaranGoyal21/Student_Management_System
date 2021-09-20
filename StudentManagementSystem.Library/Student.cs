@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace StudentManagementSystem.Library
 {
     public class Student
     {
+        public ObjectId Id { get; set; }
         public int Standard { get; set; }
         public int RollNo { get; set; }
         public string Name { get; set; }
