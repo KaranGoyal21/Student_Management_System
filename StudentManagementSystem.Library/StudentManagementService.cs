@@ -134,7 +134,7 @@ namespace StudentManagementSystem.Library
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    _studentRepoService.DeleteStudent(eachStudent);
+                    _studentRepoService.DeleteStudent(rollNo, eachStudent);
                     return DisplayAllStudentsData();
                 }
             }
@@ -142,16 +142,14 @@ namespace StudentManagementSystem.Library
         }
 
 
-        public void AddSubject(int rollNo)
+        public void AddSubject(int rollNo, List<SubjectSelectionRepository> subjects)
         {
             foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    Console.WriteLine("\nEnter Subjects seperated by ','");
-                    Console.Write($"Enter Subjects: ");
-
-                    eachStudent.AddingSubject(_validate.GetSubjectInput());
+                    eachStudent.AddingSubject(subjects);
+                    _studentRepoService.UpdateStudent(rollNo,eachStudent);
                     break;
                 }
             }
@@ -159,22 +157,38 @@ namespace StudentManagementSystem.Library
             DisplayAllStudentsData();
         }
 
-        public void RemoveSubject(int rollNo)
+
+        public void RemoveSubject(int rollNo, List<SubjectSelectionRepository> subjects)
         {
             foreach (var eachStudent in _studentRepoService.FetchStudents())
             {
                 if (rollNo == eachStudent.RollNo)
                 {
-                    Console.WriteLine("\nEnter Subjects seperated by ','");
-                    Console.Write($"Enter Subjects: ");
-
-                    eachStudent.RemovingSubject(_validate.GetSubjectInput());
+                    eachStudent.RemovingSubject(subjects);
+                    _studentRepoService.DeleteStudent(rollNo, eachStudent);
                     break;
                 }
             }
 
             DisplayAllStudentsData();
         }
+
+        //public void RemoveSubject(int rollNo)
+        //{
+        //    foreach (var eachStudent in _studentRepoService.FetchStudents())
+        //    {
+        //        if (rollNo == eachStudent.RollNo)
+        //        {
+        //            Console.WriteLine("\nEnter Subjects seperated by ','");
+        //            Console.Write($"Enter Subjects: ");
+
+        //            eachStudent.RemovingSubject(_validate.GetSubjectInput());
+        //            break;
+        //        }
+        //    }
+
+        //    DisplayAllStudentsData();
+        //}
 
     }
 }

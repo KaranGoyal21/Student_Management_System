@@ -7,7 +7,7 @@ namespace StudentManagementSystem.ConsoleUI
     {
         static StudentManagementService _services;
         static ValidateInputs _validate = new ValidateInputs();
-        static IStudentRepoService studentRepoService = new StudentFileRepoService();
+        static IStudentRepoService studentRepoService = new StudentMongoRepoService();
 
         static void Main(string[] args)
         {
@@ -79,23 +79,43 @@ namespace StudentManagementSystem.ConsoleUI
                     RemoveStudent();
                     break;
                 case 7:
-                    Console.Write("\nEnter Roll No: ");
-                    var userInputCase7 = _validate.GetIntegerInput();
-                    if (userInputCase7 != default)
-                    {
-                        _services.AddSubject(userInputCase7);
-                    }
+                    AddSubject();
                     break;
                 case 8:
-                    Console.Write("\nEnter Roll No: ");
-                    var userInputCase8 = _validate.GetIntegerInput();
-                    if (userInputCase8 != default)
-                    {
-                        _services.RemoveSubject(userInputCase8);
-                    }
+                    RemoveSubject();
                     break;
                 default:
                     break;
+            }
+        }
+
+        private static void RemoveSubject()
+        {
+            Console.Write("\nEnter Roll No: ");
+            var userInput = _validate.GetIntegerInput();
+
+            Console.WriteLine("\nEnter Subjects seperated by ','");
+            Console.Write($"Enter Subjects: ");
+            var subjects = _validate.GetSubjectInput();
+
+            if (userInput != default && subjects != default)
+            {
+                _services.RemoveSubject(userInput, subjects);
+            }
+        }
+
+        private static void AddSubject()
+        {
+            Console.Write("\nEnter Roll No: ");
+            var userInput = _validate.GetIntegerInput();
+
+            Console.WriteLine("\nEnter Subjects seperated by ','");
+            Console.Write($"Enter Subjects: ");
+            var subjects = _validate.GetSubjectInput();
+
+            if (userInput != default && subjects != default)
+            {
+                _services.AddSubject(userInput, subjects);
             }
         }
 

@@ -14,11 +14,6 @@ namespace StudentManagementSystem.Library
             ReadStudentsFromFile();
         }
 
-        public void DeleteStudent(Student removeStudent)
-        {
-            _listOfStudents.Remove(removeStudent);
-            SaveStudentsInFile();
-        }
 
         public List<Student> FetchStudents()
         {
@@ -28,6 +23,24 @@ namespace StudentManagementSystem.Library
         public void AddStudent(Student addStudent)
         {
             _listOfStudents.Add(addStudent);
+            SaveStudentsInFile();
+        }
+
+        public void UpdateStudent(Student updateStudent)
+        {
+            foreach (var student in _listOfStudents)
+            {
+                if (student.RollNo == updateStudent.RollNo)
+                {
+                    student.Id = updateStudent.Id;
+                    student.Standard = updateStudent.Standard;
+                    student.Name = updateStudent.Name;
+                    student.Age = updateStudent.Age;
+                    student.Height = updateStudent.Height;
+                    student.Address = updateStudent.Address;
+                    student.Subjects = updateStudent.Subjects;
+                }
+            }
             SaveStudentsInFile();
         }
 
@@ -111,5 +124,15 @@ namespace StudentManagementSystem.Library
             }
         }
 
+        public void UpdateStudent(int rollNo, Student student)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteStudent(int rollNo, Student removeStudent)
+        {
+            _listOfStudents.Remove(removeStudent);
+            SaveStudentsInFile();
+        }
     }
 }

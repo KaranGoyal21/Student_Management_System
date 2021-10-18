@@ -8,8 +8,8 @@ namespace StudentManagementSystem.Library
 
         void AddStudent(Student addStudent);
 
-        //void UpdateStudent(Student updateStudent);
+        void UpdateStudent(int rollNo, Student student);
 
-        void DeleteStudent(Student removeStudent);
+        void DeleteStudent(int rollNo, Student removeStudent);
     }
 }

@@ -15,7 +15,7 @@ namespace StudentManagementSystem.API.Controllers
     {
         StudentManagementService _services;
         ValidateInputs _validate = new ValidateInputs();
-        IStudentRepoService studentRepoService = new StudentFileRepoService();
+        IStudentRepoService studentRepoService = new StudentMongoRepoService();
 
         public StudentManagementController()
         {
@@ -70,11 +70,12 @@ namespace StudentManagementSystem.API.Controllers
             }
         }
 
-        //// PUT api/<StudentManagementController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT api/<StudentManagementController>/5
+        [HttpPut("add subject {rollNo}")]
+        public void Put(int rollNo, [FromBody] List<SubjectSelectionRepository> addSubject)
+        {
+            _services.AddSubject(rollNo,addSubject);
+        }
 
         // DELETE api/<StudentManagementController>/5
         [HttpDelete("delete_student{rollNo}")]
@@ -94,7 +95,7 @@ namespace StudentManagementSystem.API.Controllers
             }
             catch
             {
-                return BadRequest();
+                return BadRequest($"Student with Roll No: {rollNo} not found");
             }
 
         }

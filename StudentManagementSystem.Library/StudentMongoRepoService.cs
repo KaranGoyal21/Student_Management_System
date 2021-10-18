@@ -25,10 +25,10 @@ namespace StudentManagementSystem.Library
             collection.InsertOne(addStudent);
         }
 
-        public void DeleteStudent(Student removeStudent)
+        public void DeleteStudent(int rollNo, Student removeStudent)
         {
             var collection = _db.GetCollection<Student>(_table);
-            var filter = Builders<Student>.Filter.Eq("Id", removeStudent.Id);
+            var filter = Builders<Student>.Filter.Eq("RollNo", removeStudent.RollNo);
             collection.DeleteOne(filter);
 
         }
@@ -39,5 +39,15 @@ namespace StudentManagementSystem.Library
             _listOfStudents= collection.Find(new BsonDocument()).ToList();
             return _listOfStudents;
         }
+
+        public void UpdateStudent(int rollNo, Student student)
+        {
+            var collection = _db.GetCollection<Student>(_table);
+            var result = collection.ReplaceOne(
+                new BsonDocument("RollNo", rollNo),
+                student,
+                new ReplaceOptions { IsUpsert = true });
+        }
+
     }
 }
