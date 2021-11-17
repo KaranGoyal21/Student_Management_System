@@ -78,7 +78,7 @@ namespace StudentManagementSystem.Library
         public string GetAddress()
         {
             string userInput = Console.ReadLine().Trim();
-            string comparisonFormat = "^[a-zA-Z0-9-/,@]{1,200}$";
+            string comparisonFormat = "^[a-zA-Z0-9-/,@ ]{1,200}$";
             GetStringInput(userInput, comparisonFormat);
 
             if (GetStringInput(userInput, comparisonFormat) == true)

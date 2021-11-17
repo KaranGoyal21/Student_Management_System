@@ -1,0 +1,26 @@
+﻿@page "/"
+@inherits StudentListBase
+
+<div class="card-footer text-center ">
+    <h3 style="font-family:'Times New Roman', Times, serif">StudentList</h3>
+</div>
+<hr />
+
+@if (Students == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+    <div class="card-deck">
+        @foreach (var student in Students)
+        {
+            <DisplayStudent Student="student">
+                </DisplayStudent>
+
+            
+            }
+        </div>
+    }
+
+

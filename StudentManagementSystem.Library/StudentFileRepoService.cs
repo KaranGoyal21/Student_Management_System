@@ -7,7 +7,7 @@ namespace StudentManagementSystem.Library
     public class StudentFileRepoService : IStudentRepoService
     {
         private List<Student> _listOfStudents;
-        private const string _dataFilePath = @"E:\study\study\projects\Student_Management_System\StudentManagementSystem.Library\Data File\data.txt";
+        private const string _dataFilePath = @"D:\study\study\projects\Student_Management_System\StudentManagementSystem.Library\Data File\data.txt";
 
         public StudentFileRepoService()
         {

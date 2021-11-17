@@ -1,0 +1,29 @@
+﻿@page "/studentdetails/{rollNo}"
+@page "/studentdetails"
+@inherits StudentDetailsBase
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Student.Name</h1>
+            </div>
+
+            <div class="card-body text-center">
+                @*<img class="card-img-top" src="@Employee.PhotoPath" />*@
+
+                <h4>Standard : @Student.Standard</h4>
+                <h4>Roll No : @Student.RollNo</h4>
+                <h4>Age : @Student.Age</h4>
+                <h4>Height : @Student.Height</h4>
+                <h4>Address : @Student.Address</h4>
+
+            </div>
+            <div class="card-footer text-center">
+                <a href="/" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

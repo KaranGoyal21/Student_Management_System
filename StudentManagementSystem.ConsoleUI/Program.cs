@@ -7,7 +7,7 @@ namespace StudentManagementSystem.ConsoleUI
     {
         static StudentManagementService _services;
         static ValidateInputs _validate = new ValidateInputs();
-        static IStudentRepoService studentRepoService = new StudentMongoRepoService();
+        static IStudentRepoService studentRepoService = new StudentFileRepoService();
 
         static void Main(string[] args)
         {

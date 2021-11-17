@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\StudentManagementSystem.API\StudentManagementSystem.API.csproj" />
     <ProjectReference Include="..\StudentManagementSystem.Library\StudentManagementSystem.Library.csproj" />
   </ItemGroup>
 

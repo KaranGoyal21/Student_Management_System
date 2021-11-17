@@ -51,5 +51,15 @@ namespace StudentManagementSystem.Library
 
             return new List<Student>() { student1, student2, student3, student4, student5 };
         }
+
+        public void UpdateStudent(int rollNo, Student student)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void DeleteStudent(int rollNo, Student removeStudent)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
