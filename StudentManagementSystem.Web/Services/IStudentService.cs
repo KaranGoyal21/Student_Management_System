@@ -1,7 +1,5 @@
 ﻿using StudentManagementSystem.Library;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace StudentManagementSystem.Web.Services
@@ -12,10 +10,10 @@ namespace StudentManagementSystem.Web.Services
         Task<Student> GetStudentName(int rollNo);
         Task<Student> GetStudentRollNo(string name);
         Task<Student> GetStudentDetails(int rollNo);
-        void AddStudent(Student addStudent);
+        Task<Student> AddStudent(Student addStudent);
 
-        void UpdateStudent(int rollNo, Student student);
+        Task<Student> UpdateStudent(Student student);
 
-        void DeleteStudent(int rollNo, Student removeStudent);
+        //Task DeleteStudent(int rollNo, Student removeStudent);
     }
 }

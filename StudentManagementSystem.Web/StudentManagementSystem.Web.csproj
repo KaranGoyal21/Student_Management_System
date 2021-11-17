@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ManagementSystem.Components\ManagementSystem.Components.csproj" />
     <ProjectReference Include="..\StudentManagementSystem.API\StudentManagementSystem.API.csproj" />
     <ProjectReference Include="..\StudentManagementSystem.Library\StudentManagementSystem.Library.csproj" />
   </ItemGroup>

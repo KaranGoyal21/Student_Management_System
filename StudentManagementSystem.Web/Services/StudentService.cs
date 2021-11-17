@@ -16,12 +16,17 @@ namespace StudentManagementSystem.Web.Services
             //httpClient.BaseAddress = new Uri("http://localhost:2784");
             this.httpClient = httpClient;
         }
-        public void AddStudent(Library.Student addStudent)
+        public async Task<Student> AddStudent(Student addStudent)
         {
-            throw new NotImplementedException();
+            var httpResponseMessage = await httpClient.PostAsJsonAsync<Student>("api/studentmanagement/addstudent", addStudent);
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                return await httpResponseMessage.Content.ReadFromJsonAsync<Student>();
+            }
+            return null;
         }
 
-        public void DeleteStudent(int rollNo, Library.Student removeStudent)
+        public void DeleteStudent(int rollNo, Student removeStudent)
         {
             throw new NotImplementedException();
         }
@@ -46,9 +51,14 @@ namespace StudentManagementSystem.Web.Services
             return await httpClient.GetFromJsonAsync<Student>($"api/studentmanagement/student_rollNo_by_{name}");
         }
 
-        public void UpdateStudent(int rollNo, Library.Student student)
+        public async Task<Student> UpdateStudent(Student updatedstudent)
         {
-            throw new NotImplementedException();
+            var httpResponseMessage = await httpClient.PutAsJsonAsync<Student>("api/studentmanagement/add subject {rollNo}", updatedstudent);
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                return await httpResponseMessage.Content.ReadFromJsonAsync<Student>();
+            }
+            return null;
         }
     }
 }

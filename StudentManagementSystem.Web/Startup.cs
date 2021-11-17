@@ -1,16 +1,11 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StudentManagementSystem.Library;
+using StudentManagementSystem.Web.Model;
 using StudentManagementSystem.Web.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StudentManagementSystem.Web
 {
@@ -33,6 +28,7 @@ namespace StudentManagementSystem.Web
             {
                 client.BaseAddress = new Uri("http://localhost:2784");
             });
+            services.AddAutoMapper(typeof(StudentProfile));
 
         }
 
