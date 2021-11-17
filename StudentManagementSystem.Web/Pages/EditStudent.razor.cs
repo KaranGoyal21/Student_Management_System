@@ -68,7 +68,7 @@ namespace StudentManagementSystem.Web.Pages
 
             Student result = null;
 
-            if (Student.RollNo != 0)
+            if (Student.RollNo == 0)
             {
                 result = await StudentService.UpdateStudent(Student);
             }
