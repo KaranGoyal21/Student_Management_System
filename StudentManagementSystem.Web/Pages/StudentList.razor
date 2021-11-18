@@ -15,7 +15,8 @@ else
     <div class="card-deck">
         @foreach (var student in Students)
         {
-            <DisplayStudent Student="student">
+            <DisplayStudent Student="student"
+                            OnStudentDeleted="StudentDeleted">
                 </DisplayStudent>
 
             

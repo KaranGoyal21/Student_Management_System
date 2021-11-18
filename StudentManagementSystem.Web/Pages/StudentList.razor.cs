@@ -34,5 +34,10 @@ namespace StudentManagementSystem.Web.Pages
         //{
         //    Students = await x.FetchStudents();
         //}
+
+        protected async Task StudentDeleted()
+        {
+            Students = (await StudentService.FetchStudents()).ToList();
+        }
     }
 }

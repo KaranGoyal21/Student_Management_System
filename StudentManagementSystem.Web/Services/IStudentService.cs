@@ -14,6 +14,6 @@ namespace StudentManagementSystem.Web.Services
 
         Task<Student> UpdateStudent(Student student);
 
-        //Task DeleteStudent(int rollNo, Student removeStudent);
+        Task DeleteStudent(int rollNo, Student removeStudent);
     }
 }

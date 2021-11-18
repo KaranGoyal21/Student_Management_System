@@ -26,9 +26,9 @@ namespace StudentManagementSystem.Web.Services
             return null;
         }
 
-        public void DeleteStudent(int rollNo, Student removeStudent)
+        public async Task DeleteStudent(int rollNo, Student removeStudent)
         {
-            throw new NotImplementedException();
+           await httpClient.DeleteAsync($"api/studentmanagement/delete_student{rollNo}");
         }
 
         public async Task<List<Student>> FetchStudents()

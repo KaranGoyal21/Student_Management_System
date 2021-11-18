@@ -16,7 +16,10 @@
 
         <a href="@($"/editstudent/{Student.RollNo}")" class="btn btn-dark m-1">Edit</a>
 
-        <button href="#" class="btn btn-danger m-1">Delete</button>
+        <button href="#" class="btn btn-danger m-1" @onclick="Delete_Click">Delete</button>
     </div>
 
 </div>
+<Confirm @ref="DeleteConfirmation" ConfirmationChanged="ConfirmDelete_Click"
+         ConfirmationMessage=@($"Are you sure you want to delete \"{Student.Name}\"")>
+</Confirm>

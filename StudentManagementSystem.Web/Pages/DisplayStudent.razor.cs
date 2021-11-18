@@ -16,5 +16,26 @@ namespace StudentManagementSystem.Web.Pages
         [Inject]
         public IStudentService StudentService { get; set; }
 
+        [Parameter]
+        public EventCallback<int> OnStudentDeleted { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        protected ManagementSystem.Components.ConfirmBase DeleteConfirmation { get; set; }
+
+        protected void Delete_Click()
+        {
+            DeleteConfirmation.Show();
+        }
+
+        protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
+            {
+                await StudentService.DeleteStudent(Student.RollNo, Student);
+                await OnStudentDeleted.InvokeAsync(Student.RollNo);
+            }
+        }
     }
 }

@@ -68,7 +68,9 @@ namespace StudentManagementSystem.Web.Pages
 
             Student result = null;
 
-            if (Student.RollNo == 0)
+            int.TryParse(RollNo, out int studentRollNo);
+
+            if (Student.RollNo == studentRollNo)
             {
                 result = await StudentService.UpdateStudent(Student);
             }
@@ -83,21 +85,21 @@ namespace StudentManagementSystem.Web.Pages
             }
         }
 
-        //public Karan.Components.ConfirmBase DeleteConfirmation { get; set; }
+        protected ManagementSystem.Components.ConfirmBase DeleteConfirmation { get; set; }
 
-        //protected void Delete_Click()
-        //{
-        //    DeleteConfirmation.Show();
-        //}
+        protected void Delete_Click()
+        {
+            DeleteConfirmation.Show();
+        }
 
-        //protected async Task ConfirmDelete_Click(bool deleteConfirmed)
-        //{
-        //    if (deleteConfirmed)
-        //    {
-        //        await EmployeeService.DeleteEmployee(Employee.EmployeeId);
-        //        NavigationManager.NavigateTo("/");
-        //    }
-        //}
+        protected async Task ConfirmDelete_Click(bool deleteConfirmed)
+        {
+            if (deleteConfirmed)
+            {
+                await StudentService.DeleteStudent(Student.RollNo, Student);
+                NavigationManager.NavigateTo("/");
+            }
+        }
     }
 }
 
