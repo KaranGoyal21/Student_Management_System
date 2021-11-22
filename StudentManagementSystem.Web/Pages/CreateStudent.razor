@@ -1,0 +1,6 @@
+﻿@page "/createstudent"
+@inherits CreateStudentBase
+
+<StudentForm InvokeForm="OpenCreateForm" HandleValidSubmit="HandleValidSubmit"
+             PageHeaderText=@($"Create Student") EditStudentModel="StudentData">
+</StudentForm>

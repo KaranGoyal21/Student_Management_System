@@ -23,33 +23,6 @@ namespace StudentManagementSystem.Web.Pages
 
         public List<SubjectSelectionRepository> Subjects { get; set; }
 
-        //public EditStudentModel()
-        //{ }
-
-        //public EditStudentModel(int standard, int rollNo, string name, int age, double height, string address, List<SubjectSelectionRepository> subjects)
-        //{
-        //    this.Standard = standard;
-        //    this.RollNo = rollNo;
-        //    this.Name = name;
-        //    this.Age = age;
-        //    this.Height = height;
-        //    this.Address = address;
-        //    this.Subjects = subjects;
-        //}
-
-        //public EditStudentModel(string name, int age, int standard)
-        //{
-        //    this.Name = name;
-        //    this.Age = age;
-        //    this.Standard = standard;
-        //}
-
-        //public EditStudentModel(string name, int age)
-        //{
-        //    this.Name = name;
-        //    this.Age = age;
-        //}
-
         public bool AddingSubject(SubjectSelectionRepository subject)
         {
             bool subjectExists = false;

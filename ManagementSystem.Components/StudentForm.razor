@@ -1,8 +1,6 @@
-﻿@*@page "/editstudent/{rollNo}"
-@page "/editstudent"
-@page "/createstudent"
+﻿@using Microsoft.AspNetCore.Components.Forms
 
-@inherits EditStudentBase
+@inherits StudentFormBase
 
 <EditForm Model="@EditStudentModel" OnValidSubmit="HandleValidSubmit">
     <DataAnnotationsValidator />
@@ -70,10 +68,10 @@
 
     @if (EditStudentModel.RollNo > 0)
     {
-    <button class="btn btn-danger" type="button" @onclick="Delete_Click">Delete</button>
+        <button class="btn btn-danger" type="button" @onclick="()=>OnConfirmationChange(true)">Delete</button>
     }
 </EditForm>
 
-<Confirm @ref="DeleteConfirmation" ConfirmationChanged="ConfirmDelete_Click"
-         ConfirmationMessage=@($"Are you sure you want to delete \"{EditStudentModel.Name}\"")>
-</Confirm>*@
+@*<Confirm @ref="DeleteConfirmation" ConfirmationChanged="ConfirmDelete_Click"
+             ConfirmationMessage=@($"Are you sure you want to delete \"{EditStudentModel.Name}\"")>
+    </Confirm>*@

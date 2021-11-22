@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.API
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagementSystem.Web", "StudentManagementSystem.Web\StudentManagementSystem.Web.csproj", "{0582A8A1-C677-4CE8-926E-CE828C6D8DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementSystem.Components", "ManagementSystem.Components\ManagementSystem.Components.csproj", "{3038F4C7-3EA5-467B-84C5-4EC4ECAB0E3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementSystem.Components", "ManagementSystem.Components\ManagementSystem.Components.csproj", "{3038F4C7-3EA5-467B-84C5-4EC4ECAB0E3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

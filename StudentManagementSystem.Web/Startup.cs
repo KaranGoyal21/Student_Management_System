@@ -1,9 +1,11 @@
+using ManagementSystem.Components;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StudentManagementSystem.Web.Model;
+using StudentManagementSystem.Web.Pages;
 using StudentManagementSystem.Web.Services;
 using System;
 
@@ -24,6 +26,7 @@ namespace StudentManagementSystem.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<StudentForm>();
             services.AddHttpClient<IStudentService, StudentService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:2784");
