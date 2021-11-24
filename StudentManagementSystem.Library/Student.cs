@@ -8,7 +8,9 @@ namespace StudentManagementSystem.Library
 {
     public class Student
     {
-        public ObjectId Id { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         public int Standard { get; set; }
         public int RollNo { get; set; }
         public string Name { get; set; }

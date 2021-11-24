@@ -40,6 +40,7 @@ namespace StudentManagementSystem.Library
             return _listOfStudents;
         }
 
+
         public void UpdateStudent(int rollNo, Student student)
         {
             var collection = _db.GetCollection<Student>(_table);

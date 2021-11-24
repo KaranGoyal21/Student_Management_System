@@ -45,23 +45,23 @@ namespace StudentManagementSystem.API.Controllers
         [HttpGet("student_details/{rollNo}")]
         public Student GetStudentDetails(int rollNo)
         {
-            return _services.GetDetailsOfSingleStudent(rollNo); 
+            return _services.GetDetailsOfSingleStudent(rollNo);
         }
 
         // POST api/<StudentManagementController>
         [HttpPost("addstudent")]
-        public IActionResult AddStudent([FromBody] Student addstudent)
+        public IActionResult AddStudent([FromBody] Student addStudent)
         {
             try
             {
-                if (addstudent == null || !ModelState.IsValid)
+                if (addStudent == null || !ModelState.IsValid)
                 {
                     return BadRequest();
                 }
                 else
                 {
-                    _services.AddStudent(addstudent);
-                    return Ok(addstudent);
+                    _services.AddStudent(addStudent);
+                    return Ok(addStudent);
                 }
             }
             catch (Exception ex)
@@ -74,7 +74,29 @@ namespace StudentManagementSystem.API.Controllers
         [HttpPut("add subject {rollNo}")]
         public void Put(int rollNo, [FromBody] List<SubjectSelectionRepository> addSubject)
         {
-            _services.AddSubject(rollNo,addSubject);
+            _services.AddSubject(rollNo, addSubject);
+        }
+
+        // PUT api/<StudentManagementController>/5
+        [HttpPut("updateStudent")]
+        public IActionResult Put([FromBody] Student updateStudent)
+        {
+            try
+            {
+                if (updateStudent == null || !ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                else
+                {
+                    _services.UpdateStudent(updateStudent);
+                    return Ok(updateStudent);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         // DELETE api/<StudentManagementController>/5

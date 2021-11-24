@@ -53,7 +53,7 @@ namespace StudentManagementSystem.Web.Services
 
         public async Task<Student> UpdateStudent(Student updatedstudent)
         {
-            var httpResponseMessage = await httpClient.PutAsJsonAsync<Student>("api/studentmanagement/add subject {rollNo}", updatedstudent);
+            var httpResponseMessage = await httpClient.PutAsJsonAsync<Student>("api/studentmanagement/updateStudent", updatedstudent);
             if (httpResponseMessage.IsSuccessStatusCode)
             {
                 return await httpResponseMessage.Content.ReadFromJsonAsync<Student>();

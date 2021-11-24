@@ -141,6 +141,19 @@ namespace StudentManagementSystem.Library
             throw new Exception();
         }
 
+        public List<Student> UpdateStudent(Student updateStudent)
+        {
+            foreach (var eachStudent in _studentRepoService.FetchStudents())
+            {
+                if (updateStudent.RollNo == eachStudent.RollNo)
+                {
+                    _studentRepoService.UpdateStudent(updateStudent.RollNo, updateStudent);
+                    return DisplayAllStudentsData();
+                }
+            }
+            throw new Exception();
+        }
+
 
         public void AddSubject(int rollNo, List<SubjectSelectionRepository> subjects)
         {

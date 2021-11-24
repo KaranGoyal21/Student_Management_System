@@ -26,7 +26,7 @@ namespace StudentManagementSystem.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<StudentForm>();
+            //services.AddSingleton<StudentForm>();
             services.AddHttpClient<IStudentService, StudentService>(client =>
             {
                 client.BaseAddress = new Uri("http://localhost:2784");

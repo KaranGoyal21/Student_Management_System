@@ -16,26 +16,10 @@ namespace ManagementSystem.Components
         private Student Student { get; set; } = new Student();
 
         [Parameter]
-        public Student EditStudentModel { get; set;} 
+        public Student EditStudentModel { get; set; }
 
-        //[Parameter]
-        //public int Standard { get; set; }
         [Parameter]
         public int RollNo { get; set; }
-
-        //[Parameter]
-        //[Required(ErrorMessage = "Name must be provided")]
-        //[MinLength(2)]
-        //public string Name { get; set; }
-
-        //[Parameter]
-        //public int Age { get; set; }
-
-        //[Parameter]
-        //public double Height { get; set; }
-
-        //[Parameter]
-        //public string Address { get; set; }
 
         [Inject]
         public IMapper Mapper { get; set; }
@@ -46,13 +30,6 @@ namespace ManagementSystem.Components
         [Parameter]
         public EventCallback HandleValidSubmit { get; set; }
 
-        //protected async override Task OnInitializedAsync()
-        //{
-        //    Student = EditStudentModel;
-        //    Mapper.Map(EditStudentModel, Student);
-        //}
-
-
         public void Show()
         {
             StateHasChanged();
@@ -60,12 +37,6 @@ namespace ManagementSystem.Components
 
         [Parameter]
         public EventCallback<bool> InvokeForm { get; set; }
-
-
-        //protected async Task HandleValidSubmit()
-        //{
-        //    //Mapper.Map(EditStudentModel, Student);
-        //}
 
         protected async Task OnConfirmationChange(bool value)
         {

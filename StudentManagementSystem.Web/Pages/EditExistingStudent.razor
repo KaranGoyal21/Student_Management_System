@@ -1,0 +1,8 @@
+﻿@page "/editstudent/{rollNo}"
+@page "/editstudent"
+@inherits EditExistingStudentBase
+
+<StudentForm InvokeForm="OpenCreateForm" HandleValidSubmit="HandleValidSubmit"
+             PageHeaderText=@($"Edit Student") EditStudentModel="StudentData">
+</StudentForm>
+
